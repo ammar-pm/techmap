@@ -40,28 +40,34 @@
 
     $(document).on('keydown', function(event) {
        if (event.key == "Escape") {
-        $(".landing-page .search-form input.form-control").parent().css({"z-index": "9", "color": "white"});
+        $(".landing-page .search-form input.form-control").parent().css({"color": "white"});
+        $(".row.landing-content").css({"z-index": "9"});
         $(".landing-page .search-form input.form-control").css({"border-color": "white"});
         $(".search-form .hint, .search-form .block-title").html("Search for startups, enablers and investors").css({"z-index": "9", "color": "#fff"}); //.css({"z-index": "999999", "border-color": "black"});
         $(".search-full").fadeOut();
         $(".landing-page .search-form input.form-control").blur();
+        $(".info-link").fadeIn();
        }
    });
 
     // landing search
     $(".landing-page .search-form input.form-control").focus(function(){
         $(this).attr("autocomplete","off");
-        $(this).parent().css({"z-index": "999999", "color": "black"});
+        $(this).parent().css({"color": "black"});
+        $(".row.landing-content").css({"z-index": "999999"});
         $(this).css({"border-color": "black"});
         $(".search-form .hint, .search-form .block-title").html("Hit enter to search").css({"z-index": "999999", "color": "black"});
         $(".search-full").fadeIn();
+        $(".info-link").fadeOut();
     });
     $(".search-full .close").click(function(){
-        $(".landing-page .search-form input.form-control").parent().css({"z-index": "9", "color": "white"});
+        $(".landing-page .search-form input.form-control").parent().css({"color": "white"});
+        $(".row.landing-content").css({"z-index": "9"});
         $(".landing-page .search-form input.form-control").css({"border-color": "white"});
         $(".search-form .hint, .search-form .block-title").html("Search for startups, enablers and investors").css({"z-index": "9", "color": "#fff"}); //.css({"z-index": "999999", "border-color": "black"});
         $(".search-full").fadeOut();
         $(".landing-page .search-form input.form-control").blur();
+        $(".info-link").fadeIn();
     });
 
     // report

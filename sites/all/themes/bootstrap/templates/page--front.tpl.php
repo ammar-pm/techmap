@@ -138,6 +138,10 @@
 
     <div id="map"></div>
 
+    <div class="search-full">
+      <div class="close">X</div>
+    </div>
+
     <div class="row landing-content">
       <div class="col-sm-6">
         <div class="search-section">
@@ -235,10 +239,6 @@
   <div class="report">
     <span class="close-tab"> X </span>
     <?php print views_embed_view('reports','block'); ?>
-  </div>
-
-  <div class="search-full">
-    <div class="close">X</div>
   </div>
 
 </div>

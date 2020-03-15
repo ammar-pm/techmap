@@ -316,6 +316,8 @@ body {
     position: fixed;
     top: 0;
     left: 0; }
+  .front .landing-content {
+    position: relative; }
   .front .landing-page {
     height: 100vh;
     min-height: 600px; }
