@@ -1,0 +1,5 @@
+name = "LinkedIn status update"
+description = "Let users update their LinkedIn status message when creating nodes, leaving comments, ...."
+package = "Linkedin"
+core = 7.x
+dependencies[] = "linkedin"

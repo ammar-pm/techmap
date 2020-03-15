@@ -1,0 +1,5 @@
+name = "Linkedin profile integration"
+description = "Retrieve profile infos from LinkedIn for registered users"
+package = "Linkedin"
+core = 7.x
+dependencies[] = "linkedin"

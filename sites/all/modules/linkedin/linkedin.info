@@ -1,0 +1,6 @@
+name = "LinkedIn"
+description = "Provides LinkedIn integration."
+package = "Linkedin"
+core = 7.x
+configure = admin/config/services/linkedin
+

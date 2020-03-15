@@ -1,0 +1,5 @@
+name = "LinkedIn Authentication"
+description = "Allows users to log into your site using their LindedIn account"
+package = "Linkedin"
+core = 7.x
+dependencies[] = "linkedin"
