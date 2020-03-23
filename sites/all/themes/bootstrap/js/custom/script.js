@@ -227,7 +227,14 @@
     // OS Map
     if($("#map").length > 0) {
       // console.log("whatever");
-      var mymap = L.map('map', { scrollWheelZoom: false, zoomControl: true }).setView([31.958043, 34.204269], 9);
+      var PALESTINE_BOUNDS = new L.LatLngBounds(new L.LatLng(33.681782, 32.446489), new L.LatLng(30.304947, 37.602425));
+
+      var mymap = L.map('map', {
+        minZoom: 9,
+        scrollWheelZoom: false, 
+        zoomControl: true, 
+        maxBounds: PALESTINE_BOUNDS
+      }).setView([31.958043, 34.204269], 9);
 
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         // attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -258,10 +265,11 @@
           // Change layer
           setTimeout(function () {
             // map.setStyle('mapbox://styles/mapbox/streets-v11');
+            // mymap.removeLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
             L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibW9yYWR0YWxlZWIiLCJhIjoiY2s2dW45Z29pMDFzMzNlbGcydzk3eTlodCJ9.4ILWxhFr5b3rTb0fFMZPPw', {
             // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A', {
               attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-              maxZoom: 18,
+              minZoom: 9,
               id: 'mapbox.streets'
               // accessToken: 'your.mapbox.access.token'
             }).addTo(mymap);
