@@ -246,7 +246,6 @@
       //   id: 'mapbox.streets'
       //   // accessToken: 'your.mapbox.access.token'
       // }).addTo(mymap);
-
       var markers = L.markerClusterGroup({
         // spiderfyOnMaxZoom: false,
         showCoverageOnHover: false
