@@ -2,6 +2,22 @@
 
   $(document).ready(function(){
 
+    if( $(".view-enablers, .view-startups").length > 0 ) {
+      $(document).scroll(function(){
+        
+        var scrollOffset = $(this).scrollTop();
+
+        if( scrollOffset > 100 ) {
+          $(".view-filters").addClass("sticky");
+          $(".view-content").css("padding-top", "104px");
+        } else {
+          $(".view-filters").removeClass("sticky");
+          $(".view-content").css("padding-top", "0");
+        }
+
+      });
+    }
+
     // landing counters
     var enablers_counter = $(".view-display-id-enablers_counter .view-header")[0];
     var statrups_counter = $(".view-display-id-startups_counter .view-header")[0];

@@ -574,4 +574,17 @@ body {
   .map-page .leaflet-control-zoom {
     margin-top: 64px !important; }
 
+.view-enablers .view-filters, .view-startups .view-filters {
+  position: relative; }
+  .view-enablers .view-filters.sticky, .view-startups .view-filters.sticky {
+    position: fixed;
+    top: 51px;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    padding: 0 15px;
+    background: #fff; }
+    .view-enablers .view-filters.sticky .views-exposed-widgets, .view-startups .view-filters.sticky .views-exposed-widgets {
+      margin-bottom: 0; }
+
 /*# sourceMappingURL=style.css.map */

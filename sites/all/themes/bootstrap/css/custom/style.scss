@@ -754,4 +754,24 @@ body {
   }
 }
 
+// Enablers/Startups page
+.view-enablers, .view-startups {
+  .view-filters {
+    position: relative;
+
+    &.sticky {
+      position: fixed;
+      top: 51px;
+      left: 0;
+      width: 100%;
+      z-index: 99;
+      padding: 0 15px;
+      background: #fff;
+      .views-exposed-widgets {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
 
