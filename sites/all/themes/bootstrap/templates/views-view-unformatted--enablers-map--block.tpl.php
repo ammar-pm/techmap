@@ -10,7 +10,7 @@
 
 <div class="enablers-map">
   <!-- <div id="mapid"></div> -->
-  <div id="map"></div>
+  <!-- <div id="map"></div> -->
   <div class="enablers">
     <?php foreach ($rows as $id => $row): ?>
       <div class="enabler">

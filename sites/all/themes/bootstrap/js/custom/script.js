@@ -44,9 +44,11 @@
         $(".row.landing-content").css({"z-index": "9"});
         $(".landing-page .search-form input.form-control").css({"border-color": "white"});
         $(".search-form .hint, .search-form .block-title").html("Search for startups, enablers and investors").css({"z-index": "9", "color": "#fff"}); //.css({"z-index": "999999", "border-color": "black"});
+        $(".landing-content .close").hide();
         $(".search-full").fadeOut();
         $(".landing-page .search-form input.form-control").blur();
         $(".info-link").fadeIn();
+        // $(".view-map-link").parent().fadeIn();
        }
    });
 
@@ -57,17 +59,20 @@
         $(".row.landing-content").css({"z-index": "999999"});
         $(this).css({"border-color": "black"});
         $(".search-form .hint, .search-form .block-title").html("Hit enter to search").css({"z-index": "999999", "color": "black"});
-        $(".search-full").fadeIn();
+        $(".search-full, .landing-content .close").fadeIn();
         $(".info-link").fadeOut();
+        // $(".view-map-link").parent().fadeOut();
     });
-    $(".search-full .close").click(function(){
+    $(".landing-content .close").click(function(){
         $(".landing-page .search-form input.form-control").parent().css({"color": "white"});
         $(".row.landing-content").css({"z-index": "9"});
         $(".landing-page .search-form input.form-control").css({"border-color": "white"});
         $(".search-form .hint, .search-form .block-title").html("Search for startups, enablers and investors").css({"z-index": "9", "color": "#fff"}); //.css({"z-index": "999999", "border-color": "black"});
+        $(".landing-content .close").hide();
         $(".search-full").fadeOut();
         $(".landing-page .search-form input.form-control").blur();
         $(".info-link").fadeIn();
+        // $(".view-map-link").parent().fadeIn();
     });
 
     // report
@@ -246,15 +251,94 @@
       //   id: 'mapbox.streets'
       //   // accessToken: 'your.mapbox.access.token'
       // }).addTo(mymap);
+
       var markers = L.markerClusterGroup({
         // spiderfyOnMaxZoom: false,
         showCoverageOnHover: false
         // zoomToBoundsOnClick: false
       });
 
-      // show map
+      // var fmarkers = L.markerClusterGroup({
+      //   showCoverageOnHover: false
+      // });
+
+      function putMarkersToMap(map) {
+        
+        // remove all markers
+        markers.clearLayers();
+        mymap.removeLayer(markers);
+
+        var marker = null;
+
+        console.log($(".enabler"));
+
+        // console.log("putMarkersToMap");
+        // console.log(markers);
+        // loop on enablers
+
+        var arrayOfLatLngs = [];
+
+        $(".enabler").each(function(index, el){
+
+          // console.log(index);
+
+          var latlng = $(this).find(".geolocation-latlng").text().split(",");
+          arrayOfLatLngs[index] = latlng;
+          // var afz_type = $(this).find(".views-field-field-afz-type").text().toLowerCase();
+          // var afz_icon = socialIcon;
+          var enabler_name = $(this).find(".views-field-title span a").text();
+          var enabler_bio = $(this).find(".views-field-body").html();
+          var enabler_space = $(this).find(".views-field-field-space").html();
+          var enabler_founded_by = $(this).find(".views-field-field-founded-by").html();
+          var enabler_internet = $(this).find(".views-field-field-internet-speed").html();
+          var enabler_website = $(this).find(".views-field-field-website").html();
+
+          // if ( afz_type.search("cultural") >= 0 ) {
+          //   afz_icon = culturalIcon;
+          // }
+          // if ( afz_type.search("restaurant") >= 0 ) {
+          //   afz_icon = restaurantIcon;
+          // }
+          // if ( afz_type.search("shop") >= 0 ) {
+          //   afz_icon = shopIcon;
+          // }
+          // if ( afz_type.search("institution") >= 0 ) {
+          //   afz_icon = instIcon;
+          // }
+          // console.log( latlng.length );
+
+          if (latlng.length > 1) {
+            var popupHtml = "<h3>" + enabler_name + "</h3><p>" + enabler_name + "</p>";
+
+            // marker with different icons
+            // var marker = L.marker([latlng[0], latlng[1]], {icon: afz_icon}).addTo(mymap).bindPopup(popupHtml);
+
+            // var marker = L.marker([latlng[0], latlng[1]]).addTo(mymap).bindPopup(popupHtml);
+            // var marker = L.marker([latlng[0], latlng[1]]).addTo(markers).bindPopup(popupHtml);
+            // markers.addLayer(L.marker([latlng[0], latlng[1]]).bindPopup(popupHtml));
+            // markers.addLayer(L.marker([latlng[0], latlng[1]]));
+
+            marker = L.marker([ latlng[0], latlng[1] ]).on('click', function(e) {
+                          renderInfo(enabler_name, enabler_bio, enabler_space, enabler_founded_by, enabler_internet, enabler_website);
+                        });
+
+            // markers.addLayer(L.marker(getRandomLatLng(map)));
+            markers.addLayer(marker);
+
+            //.bindPopup(popupHtml));
+
+            // mymap.setView([latlng[0], latlng[1]], 9);
+          }
+        });
+        map.addLayer(markers);
+        var mBounds = new L.LatLngBounds(arrayOfLatLngs);
+        map.fitBounds(mBounds);
+      }
+
+      // Front: show map on view map click
       $(".view-map-link a").click(function(event){
           event.preventDefault;
+
           // Remove home text and search
           $(".search-section").css("transform", "translate(-100%, 0)");
           $(".view-map-link").css("transform", "translate(100%, 0)");
@@ -277,55 +361,89 @@
           // after 1 second
           // Add zoom and rotation controls to the map.
           setTimeout(function () {
-              // map.addControl(new mapboxgl.NavigationControl());
-              $(".leaflet-top, .leaflet-left, .leaflet-right").fadeIn();
+            // map.addControl(new mapboxgl.NavigationControl());
+            $(".leaflet-top, .leaflet-left, .leaflet-right").fadeIn();
           }, 1500);
+  
+          setTimeout(function () {
+            $(".region-sidebar-second").fadeIn();
+          }, 1800);
           
           // Add markers
           // one marker each 0.5 second
           setTimeout(function () {
-            $(".enabler").each(function(index, el){
 
-              var latlng = $(this).find(".geolocation-latlng").text().split(",");
-              // var afz_type = $(this).find(".views-field-field-afz-type").text().toLowerCase();
-              // var afz_icon = socialIcon;
-              var enabler_name = $(this).find(".views-field-title span a").text();
+            // todo: create a function to add markers
+            /// used first time to add all markers
+            /// on filter submit to add filtered markers
+            putMarkersToMap(mymap);
 
-              // if ( afz_type.search("cultural") >= 0 ) {
-              //   afz_icon = culturalIcon;
-              // }
-              // if ( afz_type.search("restaurant") >= 0 ) {
-              //   afz_icon = restaurantIcon;
-              // }
-              // if ( afz_type.search("shop") >= 0 ) {
-              //   afz_icon = shopIcon;
-              // }
-              // if ( afz_type.search("institution") >= 0 ) {
-              //   afz_icon = instIcon;
-              // }
-              // console.log( latlng.length );
-
-              if (latlng.length > 1) {
-                var popupHtml = "<h3>" + enabler_name + "</h3><p>" + enabler_name + "</p>";
-
-                // marker with different icons
-                // var marker = L.marker([latlng[0], latlng[1]], {icon: afz_icon}).addTo(mymap).bindPopup(popupHtml);
-
-                // var marker = L.marker([latlng[0], latlng[1]]).addTo(mymap).bindPopup(popupHtml);
-                // var marker = L.marker([latlng[0], latlng[1]]).addTo(markers).bindPopup(popupHtml);
-                // markers.addLayer(L.marker([latlng[0], latlng[1]]).bindPopup(popupHtml));
-                // markers.addLayer(L.marker([latlng[0], latlng[1]]));
-
-                // markers.addLayer(L.marker(getRandomLatLng(map)));
-                markers.addLayer(L.marker([ latlng[0], latlng[1]]).bindPopup(popupHtml));
-
-                // mymap.setView([latlng[0], latlng[1]], 9);
-              }
-            });
-            mymap.addLayer(markers);
           }, 2000);
       });
+
+      // Filter: readd map markers on filter submit
+      /// #views-exposed-form-enablers-map-block
+      $("#views-exposed-form-enablers-map-block input.form-text").attr("placeholder","Search enablers...").attr("autocomplete","off");  
+
+      var searchTimeout = null;
+
+      $(document).on("keyup", "#views-exposed-form-enablers-map-block input.form-text", function(){
+
+        clearTimeout(searchTimeout);
+
+        if( $(this).val().length > 2 && $(this).val() != "") {
+          searchTimeout = setTimeout( function(){
+            // console.log("hey");
+            $("#views-exposed-form-enablers-map-block .form-submit").click();
+          }, 1000);
+        }
+
+        if( $(this).val() == "" ) {
+          $("#views-exposed-form-enablers-map-block .form-submit").click();
+        }
+      });
+
+      $(document).ajaxComplete(function(event,request, settings) {
+        // console.log("ajaxComplete");
+        putMarkersToMap(mymap);
+        var input = $("#views-exposed-form-enablers-map-block input.form-text");
+        input.focus();
+        var tmpStr = input.val();
+        input.val('');
+        input.val(tmpStr);
+
+        $("#views-exposed-form-enablers-map-block input.form-text").attr("placeholder","Search enablers...").attr("autocomplete","off");
+      });
+
+
     };
+
+    function renderInfo(name, bio, space, founded_by, internet, website) {
+      // console.log("hey");
+      var content = "";
+      content += "<h3>" + name + "</h3><div class='enabler-info'>";
+      if (bio) {
+        content += bio;
+      }
+      if (founded_by) {
+        content += founded_by;
+      }
+      if (space) {
+        content += space;
+      }
+      if (internet) {
+        content += internet;
+      }
+      if (website) {
+        content += website;
+      }
+      content += "</div>";
+      $("#marker-info-panel").css("left", "-100%").html(content).delay(500).css("left", 0);
+      $("#marker-info-panel").append("<span class='close'>X</span>");
+      $("#marker-info-panel .close").click(function(){
+        $(this).parent().css("left", "-100%");
+      });
+    }
 
   });
 

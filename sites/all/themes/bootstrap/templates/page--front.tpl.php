@@ -138,11 +138,14 @@
 
     <div id="map"></div>
 
+    <div id="marker-info-panel">
+    </div>
+
     <div class="search-full">
-      <div class="close">X</div>
     </div>
 
     <div class="row landing-content">
+      <div class="close">X</div>
       <div class="col-sm-6">
         <div class="search-section">
     
@@ -232,7 +235,7 @@
     </div>
   </div>-->
 
-  <div class="hidden">
+  <div class="">
     <?php print render($page['sidebar_second']); ?>
   </div>
 
