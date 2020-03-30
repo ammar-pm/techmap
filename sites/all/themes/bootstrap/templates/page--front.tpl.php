@@ -159,7 +159,10 @@
               <p class="hint"> Search for startups, enablers and investors </p> 
               <!- <button type="submit" class="btn btn-primary">Search</button> ->
             </form> -->
-            <?php print render($page['highlighted']); ?>
+            <?php // print render($page['highlighted']); ?>
+            <?php print views_embed_view('search','block'); ?>
+            <p class="hint">Search for startups, enablers and investors</p>
+
 
           </div>
 

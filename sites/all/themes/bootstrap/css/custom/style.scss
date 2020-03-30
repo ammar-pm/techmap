@@ -456,6 +456,37 @@ body {
     left: 0;
   }
 
+  .view-search {
+    .views-exposed-widgets {
+      margin-bottom: 5px;
+    }
+    .views-widget-filter-populate {
+      width: 100%;
+    }
+    .views-submit-button {
+      display: none;
+    }
+    .view-content {
+      color: #000;
+      position: absolute;
+      left: 0;
+      z-index: 9;
+      width: 100%;
+      padding: 15px 0;
+      h3 {
+        color: #bbb;
+        font-size: 14px;
+        font-weight: 400;
+      }
+      .views-row {
+        a {
+          color: #000;
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
   .landing-content {
     position: relative;
   }
@@ -534,6 +565,7 @@ body {
     background: rgba(255,255,255,0.92);
     max-width: 992px;
     transition: all 0.3s;
+    z-index: 99;
     article {
       padding-top: 15px;
       padding-bottom: 15px;
@@ -700,6 +732,7 @@ body {
   margin-bottom: 30px;
   margin-left: -15px;
   margin-right: -15px;
+
   label {
     font-weight: 200;
     text-transform: uppercase;
@@ -707,7 +740,7 @@ body {
   .views-exposed-widget {
     width: 25%;
     padding: 5px 15px;
-    select, button {
+    select, button, input {
       -webkit-appearance: none;
       border: none;
       box-shadow: none;
@@ -755,6 +788,11 @@ body {
 }
 
 // Enablers/Startups page
+// .view-empty {
+//   .view-header {
+//     display: none;
+//   }
+// }
 .view-enablers, .view-startups {
   .view-filters {
     position: relative;
@@ -772,6 +810,21 @@ body {
       }
     }
   }
+
+  .views-exposed-widgets {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    .views-exposed-widget {
+      width: auto;
+      flex: 1;
+      &.views-submit-button {
+        display: none;
+      }
+    }
+  }
+  
 }
 
 

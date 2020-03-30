@@ -16,12 +16,19 @@
         }
 
       });
+
+      // $(document).ajaxComplete(function(event,request, settings) {
+      //   $(".view-empty .view-header").show();
+      // });
+      
     }
 
     // landing counters
     var enablers_counter = $(".view-display-id-enablers_counter .view-header")[0];
     var statrups_counter = $(".view-display-id-startups_counter .view-header")[0];
     var investors_counter = $(".view-display-id-investors_counter .view-header")[0];
+    var mapOpened = false;
+    var searchOpened = false;
 
     // $('.counters .view-counters').each(function () {
         // $counter = $(this).find(".view-header");
@@ -54,40 +61,51 @@
         });
     // });
 
+    function closeSearch() {
+      // search form component
+      // $(".landing-page .search-form input.form-control").parent().css({"color": "white"});
+      // $(".row.landing-content").css({"z-index": "9"});
+      // $(".landing-page .search-form input.form-control").css({"border-color": "white"});
+      // $(".search-form .hint, .search-form .block-title").html("Search for startups, enablers and investors").css({"z-index": "9", "color": "#fff"}); //.css({"z-index": "999999", "border-color": "black"});
+      // $(".landing-content .close, .search-form .view-search .view-content").hide();
+      // $(".search-full").fadeOut();
+      // $(".landing-page .search-form input.form-control").blur();
+      // $(".info-link").fadeIn();
+
+      // search view: block
+      $(".landing-page .search-form #edit-title-wrapper input.form-control").parent().css({"color": "white"});
+      $(".row.landing-content").css({"z-index": "9"});
+      $(".landing-page .search-form #edit-title-wrapper input.form-control").css({"border-color": "white"});
+      $(".search-form .hint, .search-form .block-title").html("Search for startups, enablers and investors").css({"z-index": "9", "color": "#fff"}); //.css({"z-index": "999999", "border-color": "black"});
+      $(".landing-content .close, .search-form .view-search .view-content").hide();
+      $(".search-full").fadeOut();
+      $(".landing-page .search-form #edit-title-wrapper input.form-control").blur().val("");
+      $(".info-link").fadeIn();
+      searchOpened = false;
+    }
+
     $(document).on('keydown', function(event) {
-       if (event.key == "Escape") {
-        $(".landing-page .search-form input.form-control").parent().css({"color": "white"});
-        $(".row.landing-content").css({"z-index": "9"});
-        $(".landing-page .search-form input.form-control").css({"border-color": "white"});
-        $(".search-form .hint, .search-form .block-title").html("Search for startups, enablers and investors").css({"z-index": "9", "color": "#fff"}); //.css({"z-index": "999999", "border-color": "black"});
-        $(".landing-content .close").hide();
-        $(".search-full").fadeOut();
-        $(".landing-page .search-form input.form-control").blur();
-        $(".info-link").fadeIn();
+      if (event.key == "Escape") {
+        closeSearch();  
         // $(".view-map-link").parent().fadeIn();
-       }
+      }
    });
 
     // landing search
-    $(".landing-page .search-form input.form-control").focus(function(){
-        $(this).attr("autocomplete","off");
-        $(this).parent().css({"color": "black"});
-        $(".row.landing-content").css({"z-index": "999999"});
-        $(this).css({"border-color": "black"});
-        $(".search-form .hint, .search-form .block-title").html("Hit enter to search").css({"z-index": "999999", "color": "black"});
-        $(".search-full, .landing-content .close").fadeIn();
-        $(".info-link").fadeOut();
-        // $(".view-map-link").parent().fadeOut();
+    $(document).on("focus", ".landing-page .search-form #edit-title-wrapper input.form-control", function (){
+    // $(".landing-page .search-form #edit-title-wrapper input.form-control").focus(function(){
+      // $(this).attr("autocomplete","off");
+      $(this).parent().css({"color": "black"});
+      $(".row.landing-content").css({"z-index": "999999"});
+      $(this).css({"border-color": "black"});
+      $(".search-form .hint, .search-form .block-title").html("Type to search").css({"z-index": "999999", "color": "black"});
+      $(".search-full, .landing-content .close").fadeIn();
+      $(".info-link").fadeOut();
+      searchOpened = true;
+      // $(".view-map-link").parent().fadeOut();
     });
     $(".landing-content .close").click(function(){
-        $(".landing-page .search-form input.form-control").parent().css({"color": "white"});
-        $(".row.landing-content").css({"z-index": "9"});
-        $(".landing-page .search-form input.form-control").css({"border-color": "white"});
-        $(".search-form .hint, .search-form .block-title").html("Search for startups, enablers and investors").css({"z-index": "9", "color": "#fff"}); //.css({"z-index": "999999", "border-color": "black"});
-        $(".landing-content .close").hide();
-        $(".search-full").fadeOut();
-        $(".landing-page .search-form input.form-control").blur();
-        $(".info-link").fadeIn();
+        closeSearch();
         // $(".view-map-link").parent().fadeIn();
     });
 
@@ -99,7 +117,45 @@
         $(".report").css("bottom", "-100%");
     });
 
+    // Auto complete landing search
+    
+    // console.log("hey");
+    // $("")
+    var fullSearchTimeout = null;
 
+    $(document).on("keyup", ".landing-page .search-form #edit-title-wrapper input", function(){
+
+      clearTimeout(fullSearchTimeout);
+
+      if( $(this).val().length > 2 && $(this).val() != "") {
+        fullSearchTimeout = setTimeout( function(){
+          // console.log("hey");
+          // $(".search-form .hint").html("");
+          $(".landing-page .search-form .form-submit").click();
+        }, 1000);
+      }
+
+      if( $(this).val() == "" ) {
+        // $(".search-form .hint").html("Type to search");
+        $(".search-form .view-search .view-content").hide();
+      }
+    });
+
+    $(document).ajaxComplete(function(event,request, settings) {
+      // console.log("ajaxComplete");
+      // putMarkersToMap(mymap);
+      if( searchOpened ) {
+        $(".search-form .view-search .view-content").show();
+        var input = $(".landing-page .search-form #edit-title-wrapper input");
+        input.focus();
+        var tmpStr = input.val();
+        input.val('');
+        input.val(tmpStr);
+
+        $(".landing-page .search-form #edit-title-wrapper input").attr("placeholder","Search").attr("autocomplete","off");
+      }
+    });
+    
     // enablers map
     // mapbox
     // if($("#map").length > 0) {
@@ -247,6 +303,11 @@
 
     // OS Map
     if($("#map").length > 0) {
+
+      // search field
+      $(".landing-page .search-form #edit-title-wrapper input.form-control").attr("autocomplete","off").attr("placeholder","Search");
+
+
       // console.log("whatever");
       var PALESTINE_BOUNDS = new L.LatLngBounds(new L.LatLng(33.681782, 32.446489), new L.LatLng(30.304947, 37.602425));
 
@@ -354,6 +415,7 @@
       // Front: show map on view map click
       $(".view-map-link a").click(function(event){
           event.preventDefault;
+          mapOpened = true;
 
           // Remove home text and search
           $(".search-section").css("transform", "translate(-100%, 0)");
@@ -397,8 +459,11 @@
           }, 2000);
       });
 
-      // Filter: readd map markers on filter submit
-      /// #views-exposed-form-enablers-map-block
+    };
+
+    // Filter: readd map markers on filter submit
+    /// #views-exposed-form-enablers-map-block
+    if( $("#views-exposed-form-enablers-map-block").length > 0 ) {
       $("#views-exposed-form-enablers-map-block input.form-text").attr("placeholder","Search enablers...").attr("autocomplete","off");  
 
       var searchTimeout = null;
@@ -420,19 +485,19 @@
       });
 
       $(document).ajaxComplete(function(event,request, settings) {
-        // console.log("ajaxComplete");
-        putMarkersToMap(mymap);
-        var input = $("#views-exposed-form-enablers-map-block input.form-text");
-        input.focus();
-        var tmpStr = input.val();
-        input.val('');
-        input.val(tmpStr);
+        if(mapOpened) {
+          // console.log("ajaxComplete");
+          putMarkersToMap(mymap);
+          var input = $("#views-exposed-form-enablers-map-block input.form-text");
+          input.focus();
+          var tmpStr = input.val();
+          input.val('');
+          input.val(tmpStr);
 
-        $("#views-exposed-form-enablers-map-block input.form-text").attr("placeholder","Search enablers...").attr("autocomplete","off");
+          $("#views-exposed-form-enablers-map-block input.form-text").attr("placeholder","Search enablers...").attr("autocomplete","off");
+        }
       });
-
-
-    };
+    }
 
     function renderInfo(name, bio, space, founded_by, internet, website) {
       // console.log("hey");

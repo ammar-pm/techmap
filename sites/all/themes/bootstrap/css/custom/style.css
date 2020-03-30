@@ -354,6 +354,26 @@ body {
     position: fixed;
     top: 0;
     left: 0; }
+  .front .view-search .views-exposed-widgets {
+    margin-bottom: 5px; }
+  .front .view-search .views-widget-filter-populate {
+    width: 100%; }
+  .front .view-search .views-submit-button {
+    display: none; }
+  .front .view-search .view-content {
+    color: #000;
+    position: absolute;
+    left: 0;
+    z-index: 9;
+    width: 100%;
+    padding: 15px 0; }
+    .front .view-search .view-content h3 {
+      color: #bbb;
+      font-size: 14px;
+      font-weight: 400; }
+    .front .view-search .view-content .views-row a {
+      color: #000;
+      font-size: 24px; }
   .front .landing-content {
     position: relative; }
   .front .landing-page {
@@ -415,7 +435,8 @@ body {
     padding: 15px;
     background: rgba(255, 255, 255, 0.92);
     max-width: 992px;
-    transition: all 0.3s; }
+    transition: all 0.3s;
+    z-index: 99; }
     .front .report article {
       padding-top: 15px;
       padding-bottom: 15px; }
@@ -540,7 +561,7 @@ body {
   .views-exposed-widgets .views-exposed-widget {
     width: 25%;
     padding: 5px 15px; }
-    .views-exposed-widgets .views-exposed-widget select, .views-exposed-widgets .views-exposed-widget button {
+    .views-exposed-widgets .views-exposed-widget select, .views-exposed-widgets .views-exposed-widget button, .views-exposed-widgets .views-exposed-widget input {
       -webkit-appearance: none;
       border: none;
       box-shadow: none;
@@ -586,5 +607,15 @@ body {
     background: #fff; }
     .view-enablers .view-filters.sticky .views-exposed-widgets, .view-startups .view-filters.sticky .views-exposed-widgets {
       margin-bottom: 0; }
+.view-enablers .views-exposed-widgets, .view-startups .views-exposed-widgets {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%; }
+  .view-enablers .views-exposed-widgets .views-exposed-widget, .view-startups .views-exposed-widgets .views-exposed-widget {
+    width: auto;
+    flex: 1; }
+    .view-enablers .views-exposed-widgets .views-exposed-widget.views-submit-button, .view-startups .views-exposed-widgets .views-exposed-widget.views-submit-button {
+      display: none; }
 
 /*# sourceMappingURL=style.css.map */
