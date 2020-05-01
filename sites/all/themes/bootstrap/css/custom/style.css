@@ -15,72 +15,6 @@ header#navbar {
 /* 
 * Users 
 */
-/* User Form */
-body.page-user-edit .region-content {
-  max-width: 1280px;
-  margin: 20px 0; }
-body.page-user-edit fieldset.panel,
-body.page-user-edit .account-settings-tab,
-body.page-user-edit .form-actions {
-  margin-left: 220px; }
-body.page-user-edit .tab-content fieldset.panel,
-body.page-user-edit .account-settings-tab fieldset.panel {
-  margin-left: 0; }
-body.page-user-edit form div.field-group-tab-wrapper fieldset {
-  margin-left: 0; }
-body.page-user-edit .edit-field-timefield-days .form-item {
-  display: inline-block;
-  margin-right: 5px; }
-body.page-user-edit .form-item-field-operating-hours-und-0-value,
-body.page-user-edit .form-item-field-operating-hours-und-0-value2 {
-  display: inline-block;
-  width: 50%; }
-body.page-user-edit .form-item-field-operating-hours-und-0-value2 input {
-  margin-left: 5px; }
-body.page-user-edit .form-item-field-operating-hours-und-0-value input {
-  margin-right: 5px; }
-body.page-user-edit .field-group-tabs-wrapper,
-body.page-user-edit .field-name-field-profile-type {
-  display: none; }
-body.page-user-edit .company-profile .group-company-tabs {
-  display: block; }
-body.page-user-edit .enabler-profile .group-enabler {
-  display: block; }
-body.page-user-edit .investor-profile .group-investor-tabs {
-  display: block; }
-body.page-user-edit .mentor-profile .group-mentor-tabs {
-  display: block; }
-body.page-user-edit .-profile .account-settings-tab legend, body.page-user-edit .none-profile .account-settings-tab legend {
-  display: none; }
-body.page-user-edit .-profile .account-settings-tab .panel-body, body.page-user-edit .none-profile .account-settings-tab .panel-body {
-  display: block;
-  opacity: 1; }
-body.page-user-edit .-profile .field-name-field-profile-type, body.page-user-edit .none-profile .field-name-field-profile-type {
-  display: block; }
-
-/* Registration Page */
-body.page-user-register .vertical-tabs-list {
-  display: none; }
-body.page-user-register .account-settings-tab {
-  border: none;
-  box-shadow: none;
-  padding-top: 12px;
-  border-top: 1px solid #ccc; }
-  body.page-user-register .account-settings-tab:before {
-    content: "Or by email:";
-    font-size: 16px;
-    margin-bottom: 5px;
-    font-weight: 700; }
-  body.page-user-register .account-settings-tab legend {
-    display: none; }
-  body.page-user-register .account-settings-tab .panel-body {
-    display: block;
-    opacity: 1; }
-
-/* login form */
-body.page-user.not-logged-in .region-content form {
-  max-width: 520px; }
-
 /* User Profile */
 .page-user {
   font-size: 16px;
@@ -163,6 +97,229 @@ body.page-user.not-logged-in .region-content form {
 .page-user .field-name-field-photos .field-items .field-item img {
   /*margin: 2px;*/
   width: 100%; }
+
+/* login form */
+@media (min-width: 768px) {
+  body.page-user.not-logged-in .main-container {
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+    align-items: center; }
+    body.page-user.not-logged-in .main-container .nav-tabs {
+      border-bottom: none;
+      margin-bottom: 0; } }
+@media (min-width: 768px) {
+  body.page-user.not-logged-in .region-content {
+    width: 600px;
+    margin: 0 auto;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 8px 8px; } }
+body.page-user.not-logged-in .region-content form {
+  max-width: 520px; }
+  @media (min-width: 768px) {
+    body.page-user.not-logged-in .region-content form {
+      max-width: 600px;
+      position: relative; }
+      body.page-user.not-logged-in .region-content form .form-item {
+        width: 320px; }
+      body.page-user.not-logged-in .region-content form .social_login {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 200px;
+        border-left: 1px solid #ddd;
+        padding: 0 20px;
+        margin: 0 !important;
+        height: 186px;
+        z-index: 9; } }
+
+/* Reset password */
+body.page-user-password .breadcrumb {
+  display: none; }
+
+/* Registration Page */
+body.page-user-register .breadcrumb {
+  display: none; }
+body.page-user-register .horizontal-tabs-list {
+  display: none; }
+body.page-user-register .account-settings-tab {
+  border: none;
+  box-shadow: none;
+  padding-top: 12px; }
+  body.page-user-register .account-settings-tab:before {
+    content: "Or by email:";
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 700; }
+  body.page-user-register .account-settings-tab legend {
+    display: none; }
+  body.page-user-register .account-settings-tab .panel-body {
+    display: block;
+    opacity: 1; }
+@media (min-width: 768px) {
+  body.page-user-register .account-settings-tab {
+    margin-left: 209px;
+    padding-top: 0;
+    margin-bottom: 0; }
+    body.page-user-register .account-settings-tab .panel-body {
+      padding: 15px 0; }
+  body.page-user-register .social_login {
+    right: auto;
+    left: 0;
+    border-left: none !important;
+    border-right: 1px solid #ddd;
+    padding-left: 0 !important;
+    height: 254px !important; }
+  body.page-user-register .form-actions {
+    margin-left: 225px; }
+  body.page-user-register .horizontal-tabs {
+    border: none; } }
+
+/* User Form */
+body.page-user-edit {
+  counter-reset: section; }
+  body.page-user-edit .breadcrumb, body.page-user-edit .nav-tabs, body.page-user-edit #edit-locale, body.page-user-edit #edit-contact, body.page-user-edit #edit-timezone {
+    display: none; }
+  body.page-user-edit #edit-account input[type="password"], body.page-user-edit #edit-account input[type="email"], body.page-user-edit #edit-account input[type="text"] {
+    max-width: 296px; }
+  body.page-user-edit [id^=edit-social-login-social-login-providers] {
+    margin: 45px 0 30px;
+    border: none;
+    box-shadow: none;
+    border-top: 1px solid #ddd; }
+    body.page-user-edit [id^=edit-social-login-social-login-providers] .panel-heading {
+      background: transparent;
+      border: none; }
+  body.page-user-edit .region-content {
+    max-width: 980px;
+    margin: 0 auto; }
+    body.page-user-edit .region-content form .form-actions {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #fff;
+      padding: 1em;
+      margin-bottom: 0;
+      z-index: 9; }
+  body.page-user-edit .tab-content fieldset.panel,
+  body.page-user-edit .account-settings-tab fieldset.panel {
+    margin-left: 0; }
+  body.page-user-edit form div.field-group-tab-wrapper fieldset {
+    margin-left: 0; }
+  body.page-user-edit .edit-field-timefield-days .form-item {
+    display: inline-block;
+    margin-right: 5px; }
+  body.page-user-edit .form-item-field-operating-hours-und-0-value,
+  body.page-user-edit .form-item-field-operating-hours-und-0-value2 {
+    display: inline-block;
+    width: 50%; }
+  body.page-user-edit .form-item-field-operating-hours-und-0-value2 input {
+    margin-left: 5px; }
+  body.page-user-edit .form-item-field-operating-hours-und-0-value input {
+    margin-right: 5px; }
+  body.page-user-edit .field-group-tabs-wrapper,
+  body.page-user-edit .field-name-field-profile-type {
+    display: none; }
+  body.page-user-edit .company-profile .group-company-tabs {
+    display: block; }
+  body.page-user-edit .enabler-profile .group-enabler {
+    display: block; }
+  body.page-user-edit .investor-profile .group-investor-tabs {
+    display: block; }
+  body.page-user-edit .mentor-profile .group-mentor-tabs {
+    display: block; }
+  body.page-user-edit .-profile .account-settings-tab legend, body.page-user-edit .none-profile .account-settings-tab legend {
+    display: none; }
+  body.page-user-edit .-profile .account-settings-tab .panel-body, body.page-user-edit .none-profile .account-settings-tab .panel-body {
+    display: block;
+    opacity: 1; }
+  body.page-user-edit .-profile .field-name-field-profile-type, body.page-user-edit .none-profile .field-name-field-profile-type {
+    display: block; }
+  body.page-user-edit .horizontal-tabs {
+    border: none; }
+    body.page-user-edit .horizontal-tabs .collapse {
+      display: block; }
+    body.page-user-edit .horizontal-tabs .fade {
+      opacity: 1; }
+    body.page-user-edit .horizontal-tabs .horizontal-tabs-list {
+      border-top: none;
+      background: #fff;
+      border-right: none;
+      padding: 20px 0; }
+      body.page-user-edit .horizontal-tabs .horizontal-tabs-list.fixed {
+        position: fixed;
+        top: 51px;
+        z-index: 9; }
+      body.page-user-edit .horizontal-tabs .horizontal-tabs-list li {
+        counter-increment: section;
+        content: counter(section) ". ";
+        background: #fff;
+        border-right: none; }
+        body.page-user-edit .horizontal-tabs .horizontal-tabs-list li a {
+          text-transform: uppercase;
+          transition: all 0.3s;
+          font-size: 21px;
+          padding: 6px 15px 5px; }
+          body.page-user-edit .horizontal-tabs .horizontal-tabs-list li a strong {
+            font-weight: normal; }
+          body.page-user-edit .horizontal-tabs .horizontal-tabs-list li a:hover {
+            background: #ddd; }
+        body.page-user-edit .horizontal-tabs .horizontal-tabs-list li.selected a {
+          cursor: default; }
+          body.page-user-edit .horizontal-tabs .horizontal-tabs-list li.selected a:hover {
+            background: #fff; }
+    body.page-user-edit .horizontal-tabs .horizontal-tabs-panes .panel {
+      box-shadow: none; }
+    body.page-user-edit .horizontal-tabs .horizontal-tabs-panes .panel-body {
+      padding: 15px 0; }
+    body.page-user-edit .horizontal-tabs .horizontal-tabs-panes #edit-field-idea-and-value-und-0-format, body.page-user-edit .horizontal-tabs .horizontal-tabs-panes .ckeditor_links {
+      display: none !important; }
+    body.page-user-edit .horizontal-tabs .horizontal-tabs-panes #edit-picture {
+      border: none;
+      margin-bottom: 0; }
+      body.page-user-edit .horizontal-tabs .horizontal-tabs-panes #edit-picture .user-picture {
+        width: 100px; }
+      body.page-user-edit .horizontal-tabs .horizontal-tabs-panes #edit-picture .panel-heading {
+        display: none; }
+      body.page-user-edit .horizontal-tabs .horizontal-tabs-panes #edit-picture .panel-body {
+        padding: 0; }
+        body.page-user-edit .horizontal-tabs .horizontal-tabs-panes #edit-picture .panel-body input {
+          border: none;
+          box-shadow: none; }
+  body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body > div {
+    min-height: calc(100vh - 200px);
+    padding-top: 40vh;
+    opacity: 0.4;
+    transition: all 0.3s; }
+    body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body > div:first-child {
+      padding-top: 200px; }
+    body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body > div:first-child, body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body > div.active {
+      opacity: 1; }
+  body.page-user-edit .edit-profile-tab-groups input {
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid;
+    border-radius: 0;
+    font-size: 16px;
+    height: 46px; }
+  body.page-user-edit .edit-profile-tab-groups input[type="radio"] {
+    height: 15px; }
+  body.page-user-edit .edit-profile-tab-groups input[type="file"] {
+    border-bottom: none; }
+    body.page-user-edit .edit-profile-tab-groups input[type="file"]:focus {
+      outline: none; }
+  body.page-user-edit .edit-profile-tab-groups .input-group-addon {
+    background-color: #ffffff;
+    border: none;
+    border-bottom: 2px solid;
+    border-radius: 0; }
+  body.page-user-edit fieldset#edit-field-photos-und > .panel-body > div {
+    min-height: auto;
+    padding-top: 0;
+    opacity: 1; }
+    body.page-user-edit fieldset#edit-field-photos-und > .panel-body > div:first-child {
+      padding-top: 0; }
 
 /*Search Section*/
 .search-section, .view-map-link {
@@ -335,10 +492,28 @@ header#navbar {
 
 body {
   font-family: 'Overpass', sans-serif; }
-  body.page-node-396 .main-container {
+  body.page-node-398 .main-container {
+    text-align: center;
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+    align-items: center;
     direction: rtl; }
-    body.page-node-396 .main-container .entityform {
-      max-width: 520px; }
+    body.page-node-398 .main-container h1 {
+      font-family: monospace; }
+    body.page-node-398 .main-container p {
+      font-size: 21px; }
+    body.page-node-398 .main-container .entityform {
+      max-width: 520px;
+      margin: 0 auto; }
+      body.page-node-398 .main-container .entityform label {
+        display: none; }
+      body.page-node-398 .main-container .entityform input {
+        margin-bottom: 20px; }
+      body.page-node-398 .main-container .entityform #edit-submit {
+        width: 100px;
+        font-size: 18px; }
 
 .front {
   overflow: hidden;

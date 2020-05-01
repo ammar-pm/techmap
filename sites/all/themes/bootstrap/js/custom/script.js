@@ -2,6 +2,95 @@
 
   $(document).ready(function(){
 
+    function nextQuestion() {
+      $activeQuestion = $(".edit-profile-tab-groups fieldset > .panel-body > div.active");
+      $nextQuestion = $activeQuestion.next("div");
+
+      console.log($nextQuestion);
+
+      // check if next question is exists
+      if($nextQuestion.length > 0) {
+        // Scroll to question
+        $scrollOffset = $nextQuestion.offset().top;
+        $("body,html").animate({scrollTop: $scrollOffset}, 500);
+      }
+    }
+    function prevQuestion() {
+      $activeQuestion = $(".edit-profile-tab-groups fieldset > .panel-body > div.active");
+      $prevQuestion = $activeQuestion.prev("div");
+
+      console.log($prevQuestion);
+
+      // check if next question is exists
+      if($prevQuestion.length > 0) {
+        // Scroll to question
+        $scrollOffset = $prevQuestion.offset().top;
+        $("body,html").animate({scrollTop: $scrollOffset}, 500);
+      }
+    }
+
+    // edit profile 
+    // sticky tabs nav on scroll
+    if( $(".page-user-edit .edit-profile-tab-groups").length > 0 ) {
+
+      // $(document).on("click", ".horizontal-tab-button-1", function(){
+      //   console.log("here");
+      // });
+
+      // $(".edit-profile-tab-groups fieldset > .panel-body > div").first().addClass("active");
+      $(".horizontal-tabs-list a").click(function(){
+        $("body,html").animate({scrollTop: 120}, 500);
+      });
+
+      $(document).scroll(function(){
+
+        // $(".edit-profile-tab-groups fieldset > .panel-body > div").first().addClass("active");
+        
+        var scrollOffset = $(this).scrollTop();
+
+        if( scrollOffset > 114 ) {
+          $(".edit-profile-tab-groups:not(.horizontal-tab-hidden) .horizontal-tabs-list").addClass("fixed");
+          $(".edit-profile-tab-groups:not(.horizontal-tab-hidden) .horizontal-tabs-panes").css("padding-top", "114px");
+        } else {
+          $(".edit-profile-tab-groups:not(.horizontal-tab-hidden) .horizontal-tabs-list").removeClass("fixed");
+          $(".edit-profile-tab-groups:not(.horizontal-tab-hidden) .horizontal-tabs-panes").css("padding-top", "0");
+        }
+
+        $currentQuestion = $(".edit-profile-tab-groups fieldset > .panel-body > div:in-viewport").first();
+
+        if(!$currentQuestion.hasClass("active")){
+          $(".edit-profile-tab-groups fieldset > .panel-body > div").removeClass("active"); // check if answered and counted?
+          // console.log("not active");
+          $currentQuestion.addClass("active");
+          // $currentQuestion.find(".answer").first().focus(); ///
+          $currentQuestion.find("input").focus();
+        }
+
+      });
+
+      // hitting enter or arrows
+      $(document).keydown(function(e) {
+          // console.log(e.keyCode);
+          if(e.which == 13 || e.which == 40) {
+            event.preventDefault();
+            nextQuestion();
+            return false;
+          }
+          if(e.which == 38) {
+            prevQuestion();
+          }
+      });
+    }
+
+
+    // Arabic Page - coming soon
+    if( $("body.page-node-398").length > 0 ) { 
+      $("#edit-field-full-name-und-0-value").attr("placeholder","الاسم كاملاً");
+      $("#edit-field-email-und-0-email").attr("placeholder","البريد الالكتروني");
+      $("#edit-submit").text("إرسال");
+    }
+
+    // sticky filters for enablers and startups 
     if( $(".view-enablers, .view-startups").length > 0 ) {
       $(document).scroll(function(){
         
@@ -29,38 +118,35 @@
     var investors_counter = $(".view-display-id-investors_counter .view-header")[0];
     var mapOpened = false;
     var searchOpened = false;
+    $(enablers_counter).prop('Counter',0).animate({
+        Counter: $(enablers_counter).text()
+    }, {
+        duration: 2000,
+        easing: 'swing',
+        step: function (now) {
+            $(enablers_counter).text(Math.ceil(now));
+        }
+    });
+    $(statrups_counter).prop('Counter',0).animate({ // .stop().delay(700)
+        Counter: $(statrups_counter).text()
+    }, {
+        duration: 2200,
+        easing: 'swing',
+        step: function (now) {
+            $(statrups_counter).text(Math.ceil(now));
+        }
+    });
+    $(investors_counter).prop('Counter',0).animate({
+        Counter: $(investors_counter).text()
+    }, {
+        duration: 2600,
+        easing: 'swing',
+        step: function (now) {
+            $(investors_counter).text(Math.ceil(now));
+        }
+    });
 
-    // $('.counters .view-counters').each(function () {
-        // $counter = $(this).find(".view-header");
-        $(enablers_counter).prop('Counter',0).animate({
-            Counter: $(enablers_counter).text()
-        }, {
-            duration: 2000,
-            easing: 'swing',
-            step: function (now) {
-                $(enablers_counter).text(Math.ceil(now));
-            }
-        });
-        $(statrups_counter).prop('Counter',0).animate({ // .stop().delay(700)
-            Counter: $(statrups_counter).text()
-        }, {
-            duration: 2200,
-            easing: 'swing',
-            step: function (now) {
-                $(statrups_counter).text(Math.ceil(now));
-            }
-        });
-        $(investors_counter).prop('Counter',0).animate({
-            Counter: $(investors_counter).text()
-        }, {
-            duration: 2600,
-            easing: 'swing',
-            step: function (now) {
-                $(investors_counter).text(Math.ceil(now));
-            }
-        });
-    // });
-
+    // close full search
     function closeSearch() {
       // search form component
       // $(".landing-page .search-form input.form-control").parent().css({"color": "white"});
@@ -83,7 +169,6 @@
       $(".info-link").fadeIn();
       searchOpened = false;
     }
-
     $(document).on('keydown', function(event) {
       if (event.key == "Escape") {
         closeSearch();  
@@ -118,11 +203,7 @@
     });
 
     // Auto complete landing search
-    
-    // console.log("hey");
-    // $("")
     var fullSearchTimeout = null;
-
     $(document).on("keyup", ".landing-page .search-form #edit-title-wrapper input", function(){
 
       clearTimeout(fullSearchTimeout);
@@ -140,7 +221,6 @@
         $(".search-form .view-search .view-content").hide();
       }
     });
-
     $(document).ajaxComplete(function(event,request, settings) {
       // console.log("ajaxComplete");
       // putMarkersToMap(mymap);
@@ -301,7 +381,7 @@
     // }
 
 
-    // OS Map
+    // OpenStreet Map
     if($("#map").length > 0) {
 
       // search field
@@ -499,6 +579,7 @@
       });
     }
 
+    // marker info side panel
     function renderInfo(name, bio, space, founded_by, internet, website) {
       // console.log("hey");
       var content = "";

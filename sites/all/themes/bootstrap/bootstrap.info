@@ -216,4 +216,5 @@ project = "bootstrap"
 datestamp = "1561051701"
 
 stylesheets[all][] = css/custom/style.css
+scripts[] = js/jquery.viewport.mini.js
 scripts[] = js/custom/script.js

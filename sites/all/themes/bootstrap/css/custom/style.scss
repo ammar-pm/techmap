@@ -16,122 +16,17 @@ header#navbar {
   margin-top: 16px;
 }
 
+// ar
+// content
+// text-align: center;
+// heading
+// font-family: monospace;
+
+
 /* 
 * Users 
 */
-/* User Form */
-body.page-user-edit {
-  .region-content {
-    max-width: 1280px;
-    margin: 20px 0;
-  }
-  // form div fieldset:last-child,
-  fieldset.panel,
-  .account-settings-tab,
-  .form-actions {
-    margin-left: 220px;
-  }
-  .tab-content fieldset.panel,
-  .account-settings-tab fieldset.panel {
-    margin-left: 0;
-  }
-  form div.field-group-tab-wrapper fieldset {
-    margin-left: 0;
-  }
-  .edit-field-timefield-days {
-    .form-item {
-      display: inline-block;
-      margin-right: 5px;
-    }
-  }
-  .form-item-field-operating-hours-und-0-value,
-  .form-item-field-operating-hours-und-0-value2 {
-    display: inline-block;
-    width: 50%;
-  }
-  .form-item-field-operating-hours-und-0-value2 input {
-    margin-left: 5px;
-  }
-  .form-item-field-operating-hours-und-0-value input {
-    margin-right: 5px;
-  }
 
-  // profiles/tabs
-  .field-group-tabs-wrapper,
-  .field-name-field-profile-type {
-    display: none;
-  }
-  // company tabs
-  .company-profile {
-    .group-company-tabs {
-      display: block;
-    }
-  }
-  // enabler tabs
-  .enabler-profile {
-    .group-enabler {
-      display: block;
-    }
-  }
-  // investor tabs
-  .investor-profile {
-    .group-investor-tabs {
-      display: block;
-    }
-  }
-  // mentor tabs
-  .mentor-profile {
-    .group-mentor-tabs {
-      display: block;
-    }
-  }
-  .-profile, .none-profile  {
-    .account-settings-tab {
-      legend {
-        display: none;
-      }
-      .panel-body {
-        display: block;
-        opacity: 1;
-      }
-    }
-    .field-name-field-profile-type {
-      display: block;
-    }
-    // .group-profile-type-wrapper {
-    //   display: block;
-    // }
-  }
-}
-/* Registration Page */
-body.page-user-register  {
-  .vertical-tabs-list {
-    display: none;
-  }
-  .account-settings-tab {
-    border: none;
-    box-shadow: none;
-    padding-top: 12px;
-    border-top: 1px solid #ccc;
-    &:before {
-      content: "Or by email:";
-      font-size: 16px;
-      margin-bottom: 5px;
-      font-weight: 700;
-    }
-    legend {
-      display: none;
-    }
-    .panel-body {
-      display: block;
-      opacity: 1;
-    }
-  }
-}
-/* login form */
-body.page-user.not-logged-in .region-content form {
-  max-width: 520px;
-}
 /* User Profile */
 .page-user {
   font-size: 16px;
@@ -235,6 +130,368 @@ body.page-user.not-logged-in .region-content form {
   /*margin: 2px;*/
   width: 100%;
 }
+
+/* login form */
+body.page-user.not-logged-in {
+  @media(min-width: 768px) {
+    .main-container {
+      display: flex;
+      justify-content: center;
+      height: 70vh;
+      align-items: center;
+      .nav-tabs {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .region-content {
+    @media(min-width: 768px) {
+      width: 600px;
+      margin: 0 auto;
+      padding: 25px;
+      border: 1px solid #ddd;
+      border-radius: 0 0 8px 8px;
+    }
+    form {
+      max-width: 520px;
+      @media(min-width: 768px) {
+        max-width: 600px;
+        position: relative;
+        .form-item {
+          width: 320px;
+        }
+        .social_login {
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 200px;
+          border-left: 1px solid #ddd;
+          padding: 0 20px;
+          margin: 0 !important;
+          height: 186px;
+          z-index: 9;
+        }
+      }
+    }
+  }
+
+}
+
+/* Reset password */
+body.page-user-password {
+  .breadcrumb {
+    display: none;
+  }
+}
+
+/* Registration Page */
+body.page-user-register  {
+  .breadcrumb {
+    display: none;
+  }
+  .horizontal-tabs-list {
+    display: none;
+  }
+  .account-settings-tab {
+    border: none;
+    box-shadow: none;
+    padding-top: 12px;
+    // border-top: 1px solid #ccc;
+
+    &:before {
+      content: "Or by email:";
+      font-size: 16px;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+    legend {
+      display: none;
+    }
+    .panel-body {
+      display: block;
+      opacity: 1;
+    }
+  }
+  @media (min-width: 768px) {
+    .account-settings-tab {
+      margin-left: 209px;
+      padding-top: 0;
+      margin-bottom: 0;
+      .panel-body {
+        padding: 15px 0;
+      }
+    }
+    .social_login {
+      right: auto;
+      left: 0;
+      border-left: none !important;
+      border-right: 1px solid #ddd;
+      padding-left: 0 !important;
+      height: 254px !important;
+    }
+    .form-actions {
+      margin-left: 225px;
+    }
+    .horizontal-tabs {
+      border: none;
+    }
+  }
+}
+
+/* User Form */
+body.page-user-edit {
+  counter-reset: section;
+  .breadcrumb, .nav-tabs, #edit-locale, #edit-contact, #edit-timezone {
+    display: none;
+  }
+  #edit-account {
+    input[type="password"], input[type="email"], input[type="text"] {
+      max-width: 296px;
+    }
+  }
+  [id^=edit-social-login-social-login-providers] {
+    margin: 45px 0 30px;
+    border: none;
+    box-shadow: none;
+    border-top: 1px solid #ddd;
+    .panel-heading {
+      background: transparent;
+      border: none;
+    }
+  }
+  .region-content {
+    // max-width: 1280px;
+    // margin: 20px 0;
+    max-width: 980px;
+    margin: 0 auto;
+    form {
+      // .form-actions {
+      //   padding: 0 1em;
+      // }
+      .form-actions {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #fff;
+        padding: 1em;
+        margin-bottom: 0;
+        z-index: 9;
+      }
+    }
+  }
+  // form div fieldset:last-child,
+  fieldset.panel,
+  .account-settings-tab,
+  .form-actions {
+    // margin-left: 220px;
+  }
+  .tab-content fieldset.panel,
+  .account-settings-tab fieldset.panel {
+    margin-left: 0;
+  }
+  form div.field-group-tab-wrapper fieldset {
+    margin-left: 0;
+  }
+  .edit-field-timefield-days {
+    .form-item {
+      display: inline-block;
+      margin-right: 5px;
+    }
+  }
+  .form-item-field-operating-hours-und-0-value,
+  .form-item-field-operating-hours-und-0-value2 {
+    display: inline-block;
+    width: 50%;
+  }
+  .form-item-field-operating-hours-und-0-value2 input {
+    margin-left: 5px;
+  }
+  .form-item-field-operating-hours-und-0-value input {
+    margin-right: 5px;
+  }
+
+  // profiles/tabs
+  .field-group-tabs-wrapper,
+  .field-name-field-profile-type {
+    display: none;
+  }
+  // company tabs
+  .company-profile {
+    .group-company-tabs {
+      display: block;
+    }
+  }
+  // enabler tabs
+  .enabler-profile {
+    .group-enabler {
+      display: block;
+    }
+  }
+  // investor tabs
+  .investor-profile {
+    .group-investor-tabs {
+      display: block;
+    }
+  }
+  // mentor tabs
+  .mentor-profile {
+    .group-mentor-tabs {
+      display: block;
+    }
+  }
+  .-profile, .none-profile  {
+    .account-settings-tab {
+      legend {
+        display: none;
+      }
+      .panel-body {
+        display: block;
+        opacity: 1;
+      }
+    }
+    .field-name-field-profile-type {
+      display: block;
+    }
+    // .group-profile-type-wrapper {
+    //   display: block;
+    // }
+  }
+
+  // horizontal tabs
+  .horizontal-tabs {
+    border: none;
+    .collapse {
+      display: block;
+    }
+    .fade {
+      opacity: 1;
+    }
+    .horizontal-tabs-list {
+      border-top: none;
+      background: #fff;
+      border-right: none;
+      padding: 20px 0;
+      &.fixed {
+        position: fixed;
+        top: 51px;
+        z-index: 9;
+      }
+      // list-style: decimal;
+      li {
+        counter-increment: section;
+        content: counter(section) ". ";
+        background: #fff;
+        border-right: none;
+        a {
+          text-transform: uppercase;
+          transition: all 0.3s;
+          font-size: 21px;
+          padding: 6px 15px 5px;
+          strong {
+            font-weight: normal;
+          }
+          &:hover {
+            background: #ddd;
+          }
+        }
+        &.selected {
+          a {
+            cursor: default;
+            &:hover {
+              background: #fff;
+            }
+          }
+        }
+      }
+    }
+    .horizontal-tabs-panes {
+      // padding: 68px 0;
+      .panel {
+        box-shadow: none;
+      }
+      .panel-body {
+        padding: 15px 0;
+      }
+      #edit-field-idea-and-value-und-0-format, .ckeditor_links {
+        display: none !important;
+      }
+      #edit-picture {
+        border: none;
+        margin-bottom: 0;
+        .user-picture {
+          width: 100px;
+        }
+        .panel-heading {
+          display: none;
+        }
+        .panel-body {
+          padding: 0;
+          input {
+            border: none;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+  .field-group-htabs-wrapper.no-padding {
+    fieldset {
+      // padding: 0;
+    }
+  }
+
+  // edit profile tabs content
+  .edit-profile-tab-groups {
+    fieldset > .panel-body > div {
+      min-height: calc(100vh - 200px); // 60vh; // 
+      padding-top: 40vh; //200px; // 40vh; //
+      opacity: 0.4;
+      transition: all 0.3s;
+      &:first-child {
+        padding-top: 200px;
+      }
+      &:first-child, &.active {
+        opacity: 1;
+      }
+    }
+    input {
+      border: none;
+      box-shadow: none;
+      border-bottom: 2px solid;
+      border-radius: 0;
+      // max-width: 500px;
+      font-size: 16px;
+      height: 46px;
+    }
+    input[type="radio"] {
+      height: 15px;
+    }
+    input[type="file"] {
+      border-bottom: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    .input-group-addon {
+      background-color: #ffffff;
+      border: none;
+      border-bottom: 2px solid;
+      border-radius: 0;
+    }
+  }
+  fieldset#edit-field-photos-und > .panel-body > div {
+    min-height: auto;
+    padding-top: 0;
+    opacity: 1;
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+}
+
+///
 
 
 /*Search Section*/
@@ -424,11 +681,34 @@ header#navbar {
 }
 body {
   font-family: 'Overpass', sans-serif;
-  &.page-node-396 .main-container {
+  &.page-node-398 .main-container {
     // Arabic page
+    text-align: center;
     direction: rtl;
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+    align-items: center;
+    direction: rtl;
+    h1 {
+      font-family: monospace;
+    }
+    p {
+      font-size: 21px;
+    }
     .entityform {
       max-width: 520px;
+      margin: 0 auto;
+      label {
+        display: none;
+      }
+      input {
+        margin-bottom: 20px;
+      }
+      #edit-submit {
+        width: 100px;
+        font-size: 18px;
+      }
     }
   }
 }
