@@ -1,0 +1,12 @@
+name = HTTP Auth
+description = This module allows you to set up HTTP authentication on your site. You can easily set username and password for HTTP Authentication. No server site configuration needed.
+core = 7.x
+package = HTTP Auth
+configure = admin/config/development/http-auth
+
+; Information added by Drupal.org packaging script on 2017-09-18
+version = "7.x-1.5"
+core = "7.x"
+project = "http_auth"
+datestamp = "1505736848"
+

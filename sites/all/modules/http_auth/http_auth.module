@@ -1,0 +1,184 @@
+<?php
+
+/**
+ * @file
+ * Enables Drupal to add HTTP Auth from frontend on all over the site/pages.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function http_auth_menu() {
+
+  $items = array();
+
+  $items['admin/config/development/http-auth'] = array(
+    'title'            => 'Http Auth settings',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('http_auth_settings_form'),
+    'access arguments' => array('administer http auth module'),
+    'description'      => 'Allow to add HTTP Auth on your site or admin pages',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function http_auth_permission() {
+
+  $permissions['administer http auth module'] = array(
+    'title'           => t('HTTP Auth'),
+    'restrict access' => TRUE,
+    'description'     => t('Users who have this permission can change the HTTP Auth settings.'),
+  );
+
+  return $permissions;
+}
+
+/**
+ * Implements hook_form().
+ */
+function http_auth_settings_form($form, &$form_state) {
+  $http_auth_section = variable_get('http_auth');
+  if (!is_array($http_auth_section)) {
+    $http_auth_section = unserialize($http_auth_section);
+  }
+  $applicable = array('complete' => t('Complete Site'), 'admin' => t('Admin and User Pages'));
+
+  $form['http_auth'] = array(
+    '#type'         => 'fieldset',
+    '#title'        => t('Add HTTP Auth on your site'),
+    '#description'  => t('By activating, your site or admin pages would be <strong>locked</strong> for unauthenticated users.'),
+  );
+
+  $form['http_auth']['username'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('HTTP Auth Username'),
+    '#description'   => t('Add HTTP Auth username'),
+    '#default_value' => isset($http_auth_section['username']) ? $http_auth_section['username'] : '',
+    '#size'          => 60,
+    '#maxlength'     => 64,
+    '#required'      => TRUE,
+    '#attributes'    => array(
+      'placeholder'  => 'username',
+    ),
+  );
+
+  $form['http_auth']['password'] = array(
+    '#type'          => 'password',
+    '#title'         => t('HTTP Auth password'),
+    '#description'   => t('Add HTTP Auth password'),
+    '#default_value' => isset($http_auth_section['password']) ? $http_auth_section['password'] : '',
+    '#size'          => 60,
+    '#maxlength'     => 64,
+    '#required'      => TRUE,
+    '#attributes'    => array(
+      'placeholder'  => 'password',
+    ),
+  );
+
+  $form['http_auth']['message'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('HTTP Auth Message'),
+    '#description'   => t('Add HTTP Auth message which would be shown to the unauthenticated users.'),
+    '#default_value' => isset($http_auth_section['message']) ? $http_auth_section['message'] : '',
+    '#attributes'    => array(
+      'placeholder'  => t('This page is Restricted. Please contact the administrator for access.'),
+    ),
+  );
+
+  $form['http_auth']['applicable'] = array(
+    '#type'          => 'radios',
+    '#title'         => t('Applicable on:'),
+    '#default_value' => isset($http_auth_section['applicable']) ? $http_auth_section['applicable'] : 'complete',
+    '#options'       => $applicable,
+  );
+
+  $form['http_auth']['activate'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Activate HTTP Authentication'),
+    '#default_value' => isset($http_auth_section['activate']) ? $http_auth_section['activate'] : 0,
+  );
+
+  $form['http_auth']['note'] = array(
+    '#markup' => "<div><strong>Note:</strong> Please clear the cache if the settings wouldn't work!</div>",
+  );
+
+  $form['submit'] = array(
+    '#type'  => 'submit',
+    '#value' => 'Save Settings',
+  );
+
+  return $form;
+}
+
+/**
+ * Submit handler().
+ */
+function http_auth_settings_form_submit($form, &$form_state) {
+  $http_auth['username']   = $form_state['values']['username'];
+  $http_auth['password']   = $form_state['values']['password'];
+  $http_auth['message']    = $form_state['values']['message'];
+  $http_auth['applicable'] = $form_state['values']['applicable'];
+  $http_auth['activate']   = $form_state['values']['activate'];
+  $http_auth_settings = serialize($http_auth);
+  variable_set('http_auth', $http_auth_settings);
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function http_auth_page_alter(&$page) {
+  global $user;
+  if (is_array($user->roles) && in_array('administrator', $user->roles)) {
+    return;
+  }
+
+  $realm = 'Restricted Page';
+  $http_auth = variable_get('http_auth');
+  if (!is_array($http_auth)) {
+    $http_auth = unserialize($http_auth);
+  }
+
+  if (isset($http_auth) && !empty($http_auth) && isset($http_auth['activate']) && $http_auth['activate'] == 1) {
+    if ($http_auth['applicable'] == 'admin') {
+      if (strpos($_SERVER['REQUEST_URI'], '/admin') === FALSE && strpos($_SERVER['REQUEST_URI'], '/user') === FALSE && strpos($_SERVER['REQUEST_URI'], '/user/login') === FALSE) {
+        return;
+      }
+    }
+
+    $username = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '';
+    $password = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
+
+    if (!($http_auth['username'] == $username && $http_auth['password'] == $password)) {
+      $message = $http_auth['message'];
+      header('WWW-Authenticate: Basic realm="' . $realm . '"');
+      header('HTTP/1.0 401 Unauthorized');
+      if (empty($message)) {
+        $message = "This page is Restricted. Please contact the administrator for access.";
+      }
+      die(http_auth_cancel_page($message));
+    }
+  }
+}
+
+/**
+ * Returns the page to the unauthenticated user.
+ */
+function http_auth_cancel_page($message = '') {
+  $sitename = variable_get('site_name');
+  if ($sitename == '') {
+    $sitename = "Locked";
+  }
+  return '<html>
+            <head>
+              <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+              <title>' . $sitename . ' | Restricted Site</title>
+            </head>
+            <body class="http-restricted">
+              <p>' . $message . '</p>
+            </body>
+          </html>';
+}
