@@ -12,6 +12,9 @@ header#navbar {
 .breadcrumb {
   margin-top: 16px; }
 
+#skip-link {
+  display: none; }
+
 /* 
 * Users 
 */
@@ -24,10 +27,6 @@ header#navbar {
     max-width: 100px; }
   .page-user .field-name-field-team .group-middle .field {
     margin-bottom: 0; }
-  .page-user .field-name-field-team .field-name-field-member-name {
-    font-size: 26px;
-    font-weight: bold;
-    line-height: 38px; }
   .page-user .field-name-field-team .field-name-field-member-position {
     font-size: 20px;
     line-height: 32px; }
@@ -97,6 +96,15 @@ header#navbar {
 .page-user .field-name-field-photos .field-items .field-item img {
   /*margin: 2px;*/
   width: 100%; }
+
+.not-logged-in .menu.secondary li.first {
+  background: rgba(51, 122, 183, 0.9);
+  transition: all 0.3s; }
+  .not-logged-in .menu.secondary li.first a {
+    color: #fff;
+    font-weight: bold; }
+  .not-logged-in .menu.secondary li.first:hover {
+    background: #337ab7; }
 
 /* login form */
 @media (min-width: 768px) {
@@ -179,7 +187,8 @@ body.page-user-register .account-settings-tab {
 /* User Form */
 body.page-user-edit {
   counter-reset: section; }
-  body.page-user-edit .breadcrumb, body.page-user-edit .nav-tabs, body.page-user-edit #edit-locale, body.page-user-edit #edit-contact, body.page-user-edit #edit-timezone {
+  body.page-user-edit .breadcrumb, body.page-user-edit .nav-tabs, body.page-user-edit #edit-locale, body.page-user-edit #edit-contact, body.page-user-edit #edit-timezone,
+  body.page-user-edit .field-group-div, body.page-user-edit .form-radios div:first-child {
     display: none; }
   body.page-user-edit #edit-account input[type="password"], body.page-user-edit #edit-account input[type="email"], body.page-user-edit #edit-account input[type="text"] {
     max-width: 296px; }
@@ -221,13 +230,13 @@ body.page-user-edit {
   body.page-user-edit .field-group-tabs-wrapper,
   body.page-user-edit .field-name-field-profile-type {
     display: none; }
-  body.page-user-edit .company-profile .group-company-tabs {
+  body.page-user-edit .company-profile .group-company-tabs, body.page-user-edit .company-profile .group-company-fields {
     display: block; }
-  body.page-user-edit .enabler-profile .group-enabler {
+  body.page-user-edit .enabler-profile .group-enabler, body.page-user-edit .enabler-profile .group-hub-fields {
     display: block; }
-  body.page-user-edit .investor-profile .group-investor-tabs {
+  body.page-user-edit .investor-profile .group-investor-tabs, body.page-user-edit .investor-profile .group-investor-fields {
     display: block; }
-  body.page-user-edit .mentor-profile .group-mentor-tabs {
+  body.page-user-edit .mentor-profile .group-mentor-tabs, body.page-user-edit .mentor-profile .group-mentor-fields {
     display: block; }
   body.page-user-edit .-profile .account-settings-tab legend, body.page-user-edit .none-profile .account-settings-tab legend {
     display: none; }
@@ -287,14 +296,22 @@ body.page-user-edit {
         body.page-user-edit .horizontal-tabs .horizontal-tabs-panes #edit-picture .panel-body input {
           border: none;
           box-shadow: none; }
-  body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body > div {
-    min-height: calc(100vh - 200px);
-    padding-top: 40vh;
+    body.page-user-edit .horizontal-tabs fieldset.form-wrapper .panel-body {
+      padding-left: 15px;
+      padding-right: 15px; }
+  body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body .field-group-div > div {
+    min-height: calc(100vh - 250px);
+    padding-top: 0;
     opacity: 0.4;
-    transition: all 0.3s; }
-    body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body > div:first-child {
-      padding-top: 200px; }
-    body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body > div:first-child, body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body > div.active {
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    padding-top: 200px; }
+    body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body .field-group-div > div > div {
+      width: 100%; }
+    body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body .field-group-div > div:first-child {
+      padding-top: 0; }
+    body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body .field-group-div > div:first-child, body.page-user-edit .edit-profile-tab-groups fieldset > .panel-body .field-group-div > div.active {
       opacity: 1; }
   body.page-user-edit .edit-profile-tab-groups input {
     border: none;
@@ -488,7 +505,27 @@ body.page-user-edit {
   font-size: 16px; }
 
 header#navbar {
-  background: rgba(255, 255, 255, 0.92); }
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 0;
+  box-shadow: 0 0 3px #ccc; }
+  @media (min-width: 768px) {
+    header#navbar .main-menu-wrapper {
+      display: flex;
+      justify-content: center; }
+    header#navbar .region.region-navigation {
+      float: right; } }
+  @media (max-width: 767px) {
+    header#navbar ul.secondary, header#navbar .region.region-navigation {
+      float: none; }
+    header#navbar .region-navigation {
+      margin: 7.5px -15px; } }
+  header#navbar .region-navigation a {
+    padding: 13px 15px 17px;
+    line-height: 20px;
+    color: #777;
+    transition: all 0.3s; }
+    header#navbar .region-navigation a:hover {
+      color: #333; }
 
 body {
   font-family: 'Overpass', sans-serif; }

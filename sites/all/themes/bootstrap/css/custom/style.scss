@@ -16,6 +16,10 @@ header#navbar {
   margin-top: 16px;
 }
 
+#skip-link {
+  display: none;
+}
+
 // ar
 // content
 // text-align: center;
@@ -40,11 +44,11 @@ header#navbar {
     .group-middle .field {
       margin-bottom: 0;
     }
-    .field-name-field-member-name {
-      font-size: 26px;
-      font-weight: bold;
-      line-height: 38px;
-    }
+    // .field-name-field-member-name {
+    //   font-size: 26px;
+    //   font-weight: bold;
+    //   line-height: 38px;
+    // }
     .field-name-field-member-position {
       font-size: 20px;
       line-height: 32px;
@@ -129,6 +133,20 @@ header#navbar {
 .page-user .field-name-field-photos .field-items .field-item img {
   /*margin: 2px;*/
   width: 100%;
+}
+
+.not-logged-in {
+  .menu.secondary li.first {
+    background: rgba(51, 122, 183, 0.9);
+    transition: all 0.3s;
+    a {
+      color: #fff;
+      font-weight: bold;
+    }
+    &:hover {
+      background: rgba(51, 122, 183, 1);
+    }
+  }
 }
 
 /* login form */
@@ -243,7 +261,8 @@ body.page-user-register  {
 /* User Form */
 body.page-user-edit {
   counter-reset: section;
-  .breadcrumb, .nav-tabs, #edit-locale, #edit-contact, #edit-timezone {
+  .breadcrumb, .nav-tabs, #edit-locale, #edit-contact, #edit-timezone, 
+  .field-group-div, .form-radios div:first-child {
     display: none;
   }
   #edit-account {
@@ -319,25 +338,25 @@ body.page-user-edit {
   }
   // company tabs
   .company-profile {
-    .group-company-tabs {
+    .group-company-tabs, .group-company-fields {
       display: block;
     }
   }
   // enabler tabs
   .enabler-profile {
-    .group-enabler {
+    .group-enabler, .group-hub-fields {
       display: block;
     }
   }
   // investor tabs
   .investor-profile {
-    .group-investor-tabs {
+    .group-investor-tabs, .group-investor-fields {
       display: block;
     }
   }
   // mentor tabs
   .mentor-profile {
-    .group-mentor-tabs {
+    .group-mentor-tabs, .group-mentor-fields {
       display: block;
     }
   }
@@ -435,6 +454,10 @@ body.page-user-edit {
         }
       }
     }
+    fieldset.form-wrapper .panel-body {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
   }
   .field-group-htabs-wrapper.no-padding {
     fieldset {
@@ -444,13 +467,28 @@ body.page-user-edit {
 
   // edit profile tabs content
   .edit-profile-tab-groups {
-    fieldset > .panel-body > div {
-      min-height: calc(100vh - 200px); // 60vh; // 
-      padding-top: 40vh; //200px; // 40vh; //
+    fieldset > .panel-body .field-group-div > div {
+      // old
+      // min-height: calc(100vh - 200px); // 60vh; // 
+      // padding-top: 40vh; //200px; // 40vh; //
+      // opacity: 0.4;
+      // transition: all 0.3s;
+      // &:first-child {
+      //   padding-top: 200px;
+      // }
+      // new
+      min-height: calc(100vh - 250px);
+      padding-top: 0;
       opacity: 0.4;
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      padding-top: 200px;
+      &> div {
+        width: 100%;
+      }
       &:first-child {
-        padding-top: 200px;
+        padding-top: 0;
       }
       &:first-child, &.active {
         opacity: 1;
@@ -678,6 +716,36 @@ body.page-user-edit {
 // landing page
 header#navbar {
   background: rgba(255,255,255,0.92);
+  border-bottom: 0;
+  box-shadow: 0 0 3px #ccc;
+  @media (min-width: 768px) {
+    .main-menu-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+    .region.region-navigation {
+      float: right;
+    }
+  }
+  @media (max-width: 767px) {
+    ul.secondary, .region.region-navigation {
+      float: none;
+    }
+    .region-navigation {
+      margin: 7.5px -15px;
+    }
+  }
+  .region-navigation {
+    a {
+      padding: 13px 15px 17px;
+      line-height: 20px;
+      color: #777;
+      transition: all 0.3s;
+      &:hover {
+        color: #333;
+      }
+    }
+  }
 }
 body {
   font-family: 'Overpass', sans-serif;

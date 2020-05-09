@@ -3,23 +3,25 @@
   $(document).ready(function(){
 
     function nextQuestion() {
-      $activeQuestion = $(".edit-profile-tab-groups fieldset > .panel-body > div.active");
+      $activeQuestion = $(".edit-profile-tab-groups fieldset > .panel-body .field-group-div > div.active");
       $nextQuestion = $activeQuestion.next("div");
 
-      console.log($nextQuestion);
+      // console.log($nextQuestion);
 
       // check if next question is exists
       if($nextQuestion.length > 0) {
         // Scroll to question
         $scrollOffset = $nextQuestion.offset().top;
         $("body,html").animate({scrollTop: $scrollOffset}, 500);
+      } else {
+        $("body,html").animate({scrollTop: $(document).height()}, 500);
       }
     }
     function prevQuestion() {
-      $activeQuestion = $(".edit-profile-tab-groups fieldset > .panel-body > div.active");
+      $activeQuestion = $(".edit-profile-tab-groups fieldset > .panel-body .field-group-div > div.active");
       $prevQuestion = $activeQuestion.prev("div");
 
-      console.log($prevQuestion);
+      // console.log($prevQuestion);
 
       // check if next question is exists
       if($prevQuestion.length > 0) {
@@ -38,9 +40,11 @@
       // });
 
       // $(".edit-profile-tab-groups fieldset > .panel-body > div").first().addClass("active");
-      $(".horizontal-tabs-list a").click(function(){
+      $(".horizontal-tabs-list li:last-child a").click(function(){
         $("body,html").animate({scrollTop: 120}, 500);
       });
+
+      // $("#edit-field-company-name, #edit-field-space-name").addClass("active").find("input").focus();
 
       $(document).scroll(function(){
 
@@ -56,10 +60,11 @@
           $(".edit-profile-tab-groups:not(.horizontal-tab-hidden) .horizontal-tabs-panes").css("padding-top", "0");
         }
 
-        $currentQuestion = $(".edit-profile-tab-groups fieldset > .panel-body > div:in-viewport").first();
+        $currentQuestion = $(".edit-profile-tab-groups fieldset > .panel-body .field-group-div > div:in-viewport").first();
+        // $currentQuestion.find("input").focus();
 
         if(!$currentQuestion.hasClass("active")){
-          $(".edit-profile-tab-groups fieldset > .panel-body > div").removeClass("active"); // check if answered and counted?
+          $(".edit-profile-tab-groups fieldset > .panel-body .field-group-div > div").removeClass("active"); // check if answered and counted?
           // console.log("not active");
           $currentQuestion.addClass("active");
           // $currentQuestion.find(".answer").first().focus(); ///
