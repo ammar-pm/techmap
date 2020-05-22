@@ -39,10 +39,15 @@
   // $author = user_load($user->uid);
   // $field_profile_type = field_get_items('user', $author, 'field_profile_type');
   // $profile_type = $field_profile_type[0]['value'];
-  $username = $user_profile['field_founding_date']['#object']->name;
-  $email = $user_profile['field_founding_date']['#object']->mail;
-  if($profile_type = $user_profile['field_founding_date']['#object']->field_profile_type != null) {
-    $profile_type = $user_profile['field_founding_date']['#object']->field_profile_type['und'][0]['value']; // works
+  $user = user_load(arg(1));
+  $user_id = $user->uid;
+  $profile_type = $user->field_profile_type;
+  $username = $user->name;
+  $email = $user->mail;
+  // if($profile_type = $user_profile['field_founding_date']['#object']->field_profile_type != null) {
+  if($profile_type != null) {
+    $profile_type = $profile_type['und'][0]['value']; // works
+    // $user_profile['field_founding_date']['#object']->field_profile_type['und'][0]['value']
   } else {
     $profile_type = "none";
   }
@@ -51,11 +56,76 @@
 <div class="<?php print $profile_type ?>-profile profile"<?php print $attributes; ?>>
 
   <?php if($profile_type == "company") : ?>
-    <div class="row">
+    <div class="page-cover full-width-wrapper">
+      <div class="cover-logo">
+        <?php print render($user_profile['field_logo']); ?>
+      </div>
+      <h1><?php print render($user_profile['field_company_name']); ?></h1>
+    </div>
+
+    <div class="user-about page-section">
+      <?php print render($user_profile['field_pitch']); ?>
+    </div>
+
+    <div class="team page-section">
+      <?php print views_embed_view('team','block', $user_id ); ?> 
+    </div>
+
+    <div class="profile-fields page-section">
+      <div class="row">
+        <div class="col-sm-4">
+          <p class="label"> Located at </p>
+          <?php print render($user_profile['field_located_at']); ?>
+        </div>
+        <div class="col-sm-4">
+          <p class="label"> Business Model </p>
+          <?php print render($user_profile['field_biz_model']); ?>
+        </div>
+        <div class="col-sm-4">
+          <p class="label"> Investment Amount </p>
+          <?php print render($user_profile['field_investment_amount']); ?>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section">
+
+      <div class="imagery">
+        <div class="owl-carousel owl-theme">
+          <?php
+            $screenshots = $user_profile['field_screenshots']['#object']->field_screenshots['und'];
+            foreach ($screenshots as $key => $item) : ?>
+              <div class="item">
+                <img src="<?php print image_style_url('slide_image', $item['uri']) ?>">
+              </div> <?
+            endforeach;
+          ?>
+        </div>
+      </div>
+
+      <!-- https://www.youtube.com/embed/xVAWRVsronM
+      https://www.youtube.com/watch?v=xVAWRVsronM -->
+
+      <?php 
+        $video_url = $user_profile['field_video']['#object']->field_video['und'][0]["safe_value"]; 
+        $video = str_replace("watch?v=","embed/",$video_url);
+      ?>
+      <?php if($video != ""): ?>
+        <div class="page-section">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="<?php print $video ?>"></iframe>
+          </div>
+        </div>
+      <?php endif; ?>
+
+    </div>
+
+    <!-- <div class="row">
+
       <div class="col-sm-7">
 
         <div class="company">
-          <h1><?php print render($user_profile['field_company_name']); ?></h1>
+          
           <?php // print render($user_profile['user_picture']) ?>
           <?php print render($user_profile['field_idea_and_value']); ?>
 
@@ -149,7 +219,7 @@
       <div class="col-sm-5 col-no-rp">
         <?php print render($user_profile['field_photos']); ?>
       </div>
-    </div>
+    </div> -->
 
   <?php elseif($profile_type == "enabler") : ?>
     <div class="row">
@@ -295,3 +365,11 @@
   <?php endif; ?>
 
 </div>
+
+<script type="text/javascript">
+  jQuery(window).load(function() {
+    jQuery(".owl-carousel").trigger('refresh.owl.carousel');
+    jQuery(".owl-carousel").trigger('refresh.owl.carousel');
+    jQuery(".owl-carousel").trigger('refresh.owl.carousel');
+  });
+</script>

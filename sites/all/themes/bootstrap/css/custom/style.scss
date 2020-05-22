@@ -20,12 +20,29 @@ header#navbar {
   display: none;
 }
 
+// body.navbar-is-fixed-top {
+//   padding-top: 50px;
+// }
+.full-width-wrapper {
+  margin-left: -100%;
+  margin-right: -100%;
+  padding-left: 100%;
+  padding-right: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 // ar
 // content
 // text-align: center;
 // heading
 // font-family: monospace;
 
+.container-fluid {
+  max-width: 1300px;
+}
 
 /* 
 * Users 
@@ -34,6 +51,47 @@ header#navbar {
 /* User Profile */
 .page-user {
   font-size: 16px;
+
+  .page-cover {
+    background: #f4f4f4;
+    min-height: 500px;
+    margin-top: -15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    h1, .cover-logo {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    .field {
+      margin-bottom: 10px;
+    }
+  }
+
+  .page-section {
+    padding: 50px 0;
+  }
+
+  .user-about {
+    .field-items {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 20px;
+    }
+  }
+
+  .profile-fields {
+    text-align: center;
+  }
+
+  .label {
+    color: #c3c3c3;
+    padding: 0;
+    font-size: 12px;
+  }
 
   /* Team */
   .field-name-field-team {
@@ -109,7 +167,7 @@ header#navbar {
 }
 .page-user h1 {
   margin-top: 0;
-  margin-left: -25px;
+  // margin-left: -25px;
   font-size: 64px;
   margin-top: 10px;
   text-transform: capitalize;
@@ -117,11 +175,11 @@ header#navbar {
 .page-user h2 {
   color: #c3c3c3;
   font-size: 42px;
-  margin-left: -20px;
+  // margin-left: -20px;
 }
-.page-user .field-items {
-  max-width: 820px;
-}
+// .page-user .field-items {
+//   max-width: 820px;
+// }
 .page-user .field-name-field-photos .field-items {
   display: flex;
   flex-wrap: wrap;
@@ -150,7 +208,7 @@ header#navbar {
 }
 
 /* login form */
-body.page-user.not-logged-in {
+body.page-user.not-logged-in:not(.page-user-) {
   @media(min-width: 768px) {
     .main-container {
       display: flex;
@@ -745,6 +803,9 @@ header#navbar {
         color: #333;
       }
     }
+    .menu li.last { // remove add content link
+      display: none;
+    }
   }
 }
 body {
@@ -1174,5 +1235,236 @@ body {
   }
   
 }
+
+.startup-sector {
+  position: relative;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  overflow: hidden;
+
+  a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 2;
+    text-align: center;
+    font-size: 24px;
+    transition: all 0.3s;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    border-radius: 8px;
+    transition: all 0.3s ease-out;
+  }
+  &:hover, &:focus {
+    img {
+      transform: scale(1.1);
+    }
+    a {
+      text-decoration: none;
+      background: rgba(0,0,0,0.5);
+    }
+  }
+}
+
+// startups
+.view-startup-profiles {
+  .view-filters {
+    form {
+      max-width: 760px;
+      float: right;
+    }
+    &:before, &:after {
+      display: table;
+      content: " ";
+    }
+    &:after {
+      clear: both;
+    }
+    select {
+      option {
+        -webkit-appearance: none;
+      }
+    }
+  }
+  .view-content .row {
+    @media(min-width: 992px) {
+      display: flex;
+      .startup-teaser {
+        min-height: 380px;
+      }
+    }
+    @media(max-width: 991px) {
+      .startup-teaser {
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+.startup-teaser {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f4f4f4;
+  height: 100%;
+  position: relative;
+  .views-field-field-company-name, .views-field-name {
+    font-family: monospace;
+    font-size: 26px;
+    padding: 10px 15px;
+  }
+  .views-field-view-user {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(243, 243, 243, 1);
+    top: 100%;
+    left: 0;
+    transition: all 0.2s;
+    z-index: 3;
+    a {
+      display: block;
+      padding: 15px;
+      height: 100%;
+      color: #222;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .views-field-field-year-founded {
+    padding: 0 15px;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    left: 0;
+    font-weight: bold;
+    z-index: 1;
+  }
+  &:hover {
+    .views-field-view-user {
+      top: 0;
+      background: rgba(243, 243, 243, 0.92);
+    }
+  }
+}
+.block-views {
+  .more-link {
+    margin: 20px 0;
+    a {
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: 2px solid #222;
+      color: #222;
+      display: inline-block;
+      transition: 0.3s all;
+      font-size: 18px;
+      &:hover, &:focus {
+        text-decoration: none;
+        background: rgba(51, 122, 183, 0.86);
+        border-color: rgba(51, 122, 183, 1);
+        color: #fff;
+      }
+    }
+  }
+}
+.profile .views-field-field-team {
+  .field-content {
+    position: relative;
+    .field {
+      margin-bottom: 0;
+    }
+    .field-name-field-member-name {
+      font-size: 24px;
+      font-weight: bold;
+      font-family: monospace;
+      transition: 0.5s all;
+      padding-top: 20px;
+      padding-bottom: 30px;
+    }
+    .group-info {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 15px;
+      display: flex;
+      z-index: 2;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      background: rgba(255,255,255,0.9);
+      flex-direction: column;
+      opacity: 0;
+      transition: 0.3s all;
+    }
+    &:hover {
+      .group-info {
+        opacity: 1;
+      }
+      .field-name-field-member-name {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+// slideshow
+.imagery {
+  width: 100%;
+  height: 500px;
+  position: relative;
+
+  .owl-carousel {
+    height: 100%;
+    .owl-stage-outer {
+      height: 100%;
+      .owl-stage {
+        height: 100%;
+        .owl-item, .item {
+          height: 100%;
+          max-height: 500px;
+        }
+      }
+    }
+    .owl-item {
+      // opacity: 0.5;
+      filter: grayscale(100%);
+      transition: all 0.4s;
+      &.center {
+        // opacity: 1;
+        filter: grayscale(0%);
+      }
+    }
+    .owl-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      margin-top: -40px;
+      height: 1px;
+      button {
+        width: 50px;
+        &:focus {
+          outline: none;
+        }
+        span {
+          font-size: 80px;
+          color: #fff;
+          line-height: 80px;
+          &:hover {
+            color: red;
+          }
+        }
+      }
+      .owl-next {
+        float: right;
+      }
+    }
+  }
+}
+
 
 

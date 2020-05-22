@@ -2,6 +2,34 @@
 
   $(document).ready(function(){
 
+    if($(".page-cover").length > 0) {
+      $(document).scroll(function(){
+        
+        var scrollOffset = $(this).scrollTop();
+        var translate = scrollOffset/2;
+        var wHeight = window.innerHeight;
+        
+        $(".page-cover h1, .page-cover .cover-logo").css("transform", "translateY(" + translate + "px)" );
+        $(".page-cover h1, .page-cover .cover-logo").css("opacity", (wHeight/2 - scrollOffset)/(wHeight/2) );
+      });
+    }
+
+    var owl = $('.owl-carousel');
+
+    owl.owlCarousel({
+      margin:10,
+      loop:true,
+      autoWidth:true,
+      nav:true,
+      dots:false,
+      center: true,
+      slideTransition: "linear",
+      navSpeed: 300,
+      autoPlay: true,
+      autoplayTimeout: 4000
+    });
+
+
     function nextQuestion() {
       $activeQuestion = $(".edit-profile-tab-groups fieldset > .panel-body .field-group-div > div.active");
       $nextQuestion = $activeQuestion.next("div");

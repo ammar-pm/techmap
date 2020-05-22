@@ -215,6 +215,8 @@ core = "7.x"
 project = "bootstrap"
 datestamp = "1561051701"
 
+stylesheets[all][] = js/owlcarousel2/dist/assets/owl.carousel.min.css
 stylesheets[all][] = css/custom/style.css
 scripts[] = js/jquery.viewport.mini.js
+scripts[] = js/owlcarousel2/dist/owl.carousel.min.js
 scripts[] = js/custom/script.js
