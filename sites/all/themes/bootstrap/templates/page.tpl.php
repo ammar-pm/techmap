@@ -76,7 +76,7 @@
   global $language_content;
   $language = $language_content->language;
 ?>
-<header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
+<!-- <header id="navbar" role="banner" class="<?php // print $navbar_classes; ?>">
   <div class="<?php print $container_class; ?>">
 
     <div class="row">
@@ -145,7 +145,7 @@
     </div>
     
   </div>
-</header>
+</header> -->
 
 <?php // print_r($user->uid); 
   $author = user_load($user->uid);
@@ -153,7 +153,56 @@
   $profile_type = $field_profile_type[0]['value'];
 ?>
 
+<div class="side-nav">
+  <div>
+    <a href="<?php print $front_page; ?>" title="Home">
+      <p class="logo">+970
+        <i>Palestine</i></p>
+    </a>
+    <p class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search.. </p>
+  </div>
+
+  <div class="main-nav">
+    <div class="counters">
+      <div class="row">
+        <div class="col-sm-4"> 
+          <a href="<?php print $base_path; ?>hubs">
+            <?php print views_embed_view('counters','enablers_counter'); ?>
+          </a>
+        </div>
+        <div class="col-sm-4">
+          <a href="<?php print $base_path; ?>startups">
+            <?php print views_embed_view('counters','startups_counter'); ?> 
+          </a>
+        </div>
+        <div class="col-sm-4">
+          <a href="<?php print $base_path; ?>investors">
+            <?php print views_embed_view('counters','investors_counter'); ?>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <?php if ($user->uid) : ?>
+      <?php if (!empty($secondary_nav)): ?>
+        <?php print render($secondary_nav); ?>
+      <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if (!$user->uid) : ?>
+      <ul class="menu nav navbar-nav secondary">
+        <li class="first leaf">
+          <?php print l("Log in","user"); ?>
+        </li>
+      </ul>
+    <?php endif; ?>
+  </div>
+</div>
+
 <div class="<?php print strtolower($title); ?>-page <?php print $profile_type ?>-profile main-container <?php print $container_class; ?>">
+
 
   <header role="banner" id="page-header">
     <?php if (!empty($site_slogan)): ?>
@@ -162,6 +211,11 @@
 
     <?php print render($page['header']); ?>
   </header> <!-- /#page-header -->
+
+  <?php if( strtolower($title) == 'hubs' ) : ?>
+    <div id="map"></div>
+    <div id="marker-info-panel"></div>
+  <?php endif; ?>
 
   <div class="row">
 
@@ -208,6 +262,24 @@
 
   </div>
 </div>
+
+<div class="search-full">
+  <div class="close"><span class="glyphicon glyphicon-remove"></span></div>
+  <div class="search-section">
+    <div class="search-form">
+      
+      <!-- <h2> Explore Palestinian Innovation </h2> -->
+
+      <?php // print render($page['highlighted']); ?>
+      <?php print views_embed_view('new_search','block'); ?>
+      <p class="hint">Search for startups, enablers and investors</p>
+
+    </div>
+  </div>
+</div>
+
+
+
 
 <?php if (!empty($page['footer'])): ?>
   <footer class="footer <?php print $container_class; ?>">

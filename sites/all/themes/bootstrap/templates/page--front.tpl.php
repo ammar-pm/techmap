@@ -74,201 +74,58 @@
  * @ingroup templates
  */
 ?>
-<header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
-  <div class="<?php print $container_class; ?>">
 
-    <div class="row">
+<div class="main-container full-height <?php print $container_class; ?>">
 
-      <div class="col-sm-3">
-        <div class="navbar-header">
-          <?php if ($logo): ?>
-            <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-              <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-            </a>
-          <?php endif; ?>
+  <div class="landing">
+    <div>
+      <h1> 970 Tech Map </h1>
+      <h2> Explore the Palestinian Innovation </h2>
+    </div>
 
-          <?php if (!empty($site_name)): ?>
-            <a class="name navbar-brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
-          <?php endif; ?>
-
-          <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-              <span class="sr-only"><?php print t('Toggle navigation'); ?></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          <?php endif; ?>
+    <div class="counters">
+      <div class="row">
+        <div class="col-sm-4"> 
+          <a href="<?php print $base_path; ?>hubs">
+            <?php print views_embed_view('counters','enablers_counter'); ?>
+          </a>
+        </div>
+        <div class="col-sm-4">
+          <a href="<?php print $base_path; ?>startups">
+            <?php print views_embed_view('counters','startups_counter'); ?> 
+          </a>
+        </div>
+        <div class="col-sm-4">
+          <a href="<?php print $base_path; ?>investors">
+            <?php print views_embed_view('counters','investors_counter'); ?>
+          </a>
         </div>
       </div>
-
-      <div class="col-sm-9">
-        <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-          <div class="navbar-collapse collapse" id="navbar-collapse">
-            <nav role="navigation">
-              <div class="row">
-                
-                <div class="main-menu-wrapper col-sm-8">
-                  <?php if (!empty($primary_nav)): ?>
-                    <?php print render($primary_nav); ?>
-                  <?php endif; ?>
-                </div>
-
-                <div class="col-sm-4">
-                  <?php if ($user->uid) : ?>
-                    <?php if (!empty($secondary_nav)): ?>
-                      <?php print render($secondary_nav); ?>
-                    <?php endif; ?>
-                  <?php endif; ?>
-
-                  <?php if (!$user->uid) : ?>
-                    <ul class="menu nav navbar-nav secondary">
-                      <li class="first leaf">
-                        <?php print l("Log in","user"); ?>
-                      </li>
-                    </ul>
-                  <?php endif; ?>
-
-                  <?php if (!empty($page['navigation'])): ?>
-                    <?php print render($page['navigation']); ?>
-                  <?php endif; ?>
-                </div>
-
-              </div>
-            </nav>
-          </div>
-        <?php endif; ?>
-      </div>
-
     </div>
-    
-  </div>
-</header>
-
-<div class="main-container <?php print $container_class; ?>">
-
-  <header role="banner" id="page-header">
-    <?php if (!empty($site_slogan)): ?>
-      <p class="lead"><?php print $site_slogan; ?></p>
-    <?php endif; ?>
-
-    <?php print render($page['header']); ?>
-  </header> <!-- /#page-header -->
-
-  <div class="landing-page">
-
-    <div id="map"></div>
-
-    <div id="marker-info-panel">
-    </div>
-
-    <div class="search-full">
-    </div>
-
-    <div class="row landing-content">
-      <div class="close">X</div>
-      <div class="col-sm-6">
-        <div class="search-section">
-    
-          <div class="search-form">
-            
-            <h2> Explore Palestinian Innovation </h2>
-            <!-- <h3> Search for startups, enablers and investors </h3> -->
-
-            <!-- <form classs="form-inline" action="<?php // print $base_path; ?>search" >
-              <input type="search" class="form-control" placeholder="Type here to search" name="title" autocomplete="off">
-              <p class="hint"> Search for startups, enablers and investors </p> 
-              <!- <button type="submit" class="btn btn-primary">Search</button> ->
-            </form> -->
-            <?php // print render($page['highlighted']); ?>
-            <?php print views_embed_view('search','block'); ?>
-            <p class="hint">Search for startups, enablers and investors</p>
-
-
-          </div>
-
-          <div class="counters">
-            <div class="row">
-              <div class="col-sm-4"> 
-                <a href="<?php print $base_path; ?>enablers">
-                  <?php print views_embed_view('counters','enablers_counter'); ?>
-                </a>
-              </div>
-              <div class="col-sm-4">
-                <a href="<?php print $base_path; ?>startups">
-                  <?php print views_embed_view('counters','startups_counter'); ?> 
-                </a>
-              </div>
-              <div class="col-sm-4">
-                <a href="<?php print $base_path; ?>investors">
-                  <?php print views_embed_view('counters','investors_counter'); ?>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="info-link">
-            <p>i</p>
-          </div>
-
-        <!-- <div>
-          // print views_embed_view('reports','block');
-        </div> -->
-        </div>
-      </div>
-      <div class="col-sm-6">
-
-        <div class="view-map-link">
-          <a href="#"> View Map </a>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-  <!-- <div class="row">
-    <div class="col-md-6">
-      
-    </div>
-
-    <div class="col-md-6"> <section >
-        <?php // if (!empty($page['highlighted'])): ?>
-          <div class="highlighted jumbotron"><?php // print render($page['highlighted']); ?></div>
-        <?php // endif; ?>
-        <?php // if (!empty($breadcrumb)): print $breadcrumb; endif;?>
-        <a id="main-content"></a>
-        <?php // print render($title_prefix); ?>
-        <?php // if (!empty($title)): ?>
-           <h1 class="page-header"><?php // print $title; ?></h1>
-        <?php // endif; ?>
-        <?php // print render($title_suffix); ?>
-        <?php // print $messages; ?>
-        <?php // if (!empty($tabs)): ?>
-          <?php // print render($tabs); ?>
-        <?php // endif; ?>
-        <?php // if (!empty($page['help'])): ?>
-          <?php // print render($page['help']); ?>
-        <?php // endif; ?>
-        <?php // if (!empty($action_links)): ?>
-          <ul class="action-links"><?php // print render($action_links); ?></ul> 
-        <?php // endif; ?>
-
-        <?php // print render($page['content']); ?>
-      </section> 
-    </div>
-  </div>-->
-
-  <div class="">
-    <?php print render($page['sidebar_second']); ?>
-  </div>
-
-  <div class="report">
-    <span class="close-tab"> X </span>
-    <?php print views_embed_view('reports','block'); ?>
   </div>
 
 </div>
+
+
+<!-- <div class="search-full">
+</div>
+
+<div class="close">X</div>
+<div class="search-section">
+
+  <div class="search-form"> -->
+    
+    <!-- <h2> Explore Palestinian Innovation </h2> -->
+
+    <?php // print render($page['highlighted']); ?>
+    <?php // print views_embed_view('search','block'); ?>
+    <!-- <p class="hint">Search for startups, enablers and investors</p> -->
+
+<!-- 
+  </div>
+</div>
+ -->
+
 
 <?php if (!empty($page['footer'])): ?>
   <footer class="footer <?php print $container_class; ?>">

@@ -120,173 +120,115 @@
 
     </div>
 
-    <!-- <div class="row">
-
-      <div class="col-sm-7">
-
-        <div class="company">
-          
-          <?php // print render($user_profile['user_picture']) ?>
-          <?php print render($user_profile['field_idea_and_value']); ?>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <?php print render($user_profile['field_sector']); ?>
-            </div>
-            <div class="col-sm-6">
-              <?php print render($user_profile['field_target_mararket']); ?>
-            </div>
-          </div>
-
-          <?php print render($user_profile['field_founding_date']); ?>
-          
-          <?php print render($user_profile['field_tags']); ?>
-        </div>
-
-        <div class="business">
-          <h2> Business </h2>
-          <?php print render($user_profile['field_locations']); ?>
-
-          <div class="row">
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_business_model']); ?>
-            </div>
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_stage_of_funding']); ?>
-            </div>
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_number_of_customers']); ?>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_time_spent_at_coworking_sp']); ?>
-            </div>
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_preferred_space']); ?>
-            </div>
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_accelerator']); ?>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_initial_investment']); ?>
-            </div>
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_investment_seeking']); ?>
-            </div>
-            <div class="col-sm-4">
-              <?php print render($user_profile['field_revenue']); ?>
-            </div>
-          </div>
-          
-        </div>
-
-        <div class="team">
-          <h2> Team </h2>
-          <?php print render($user_profile['field_team']); ?>
-        </div>
-
-        <div class="network">
-          <h2> Network </h2>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <?php print render($user_profile['field_network']); ?><span> / 10</span>
-            </div>
-            <div class="col-sm-6">
-              <?php print render($user_profile['field_advisory_board']); ?>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <?php print render($user_profile['field_mentors']); ?>
-            </div>
-            <div class="col-sm-6">
-              <?php print render($user_profile['field_mentor_compensation']); ?>
-            </div>
-          </div>
-          
-          <?php print render($user_profile['field_startups_close_to']); ?>
-          
-        </div>
-
-      </div>
-      <div class="col-sm-5 col-no-rp">
-        <?php print render($user_profile['field_photos']); ?>
-      </div>
-    </div> -->
 
   <?php elseif($profile_type == "enabler") : ?>
-    <div class="row">
-        <div class="col-sm-7">
-
-            <div class="space-info">
-                
-                <h1><?php print render($user_profile['field_space_name']); ?></h1>
-
-                <?php print render($user_profile['field_cities']); ?>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <?php print render($user_profile['field_website']); ?>
-                    </div>
-                    <div class="col-sm-6">
-                        <?php print render($user_profile['field_facebook_event_page_']); ?>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <?php print render($user_profile['field_space']); ?>
-                    </div>
-                    <div class="col-sm-6">
-                        <?php print render($user_profile['field_internet_speed']); ?>
-                    </div>
-                </div>
-
-                <?php print render($user_profile['field_operating_hours']); ?>                
-            </div>
-
-            <div class="contacts">
-                <h2> Contacts </h2>
-                <?php print render($user_profile['field_contacts']); ?>  
-            </div>
-
-            <div class="programs">
-                <h2> Programs </h2>
-                <?php print render($user_profile['field_programs_offered']); ?>
-                <?php print render($user_profile['field_service']); ?>
-                <?php print render($user_profile['field_cost']); ?>
-                <?php print render($user_profile['field_equity']); ?>
-                <?php print render($user_profile['field_duration']); ?>
-                <?php print render($user_profile['field_events']); ?>
-            </div>
-
-            <div class="programs">
-                <h2> Startups </h2>
-                <?php print render($user_profile['field_target']); ?>
-                <?php print render($user_profile['field_startups']); ?>
-                <?php print render($user_profile['field_investment']); ?>
-                <?php print render($user_profile['field_stayed_startups']); ?>
-            </div>
-
-            <div class="founders">
-                <h2> Founders </h2>
-                <?php print render($user_profile['field_founded']); ?>
-                <?php print render($user_profile['field_partners']); ?>
-                <?php print render($user_profile['field_founded_by']); ?>
-            </div>
-
-        </div>
-        <div class="col-sm-5">
-            photos
-        </div>
+    <div class="page-cover full-width-wrapper">
+      <div class="cover-logo">
+        <?php // print render($user_profile['field_logo']); ?>
+      </div>
+      <h1><?php print render($user_profile['field_space_name']); ?></h1>
+      <?php print render($user_profile['field_hub_type']); ?>
     </div>
+
+    <div class="user-about page-section">
+      <?php print render($user_profile['field_space_bio']); ?>
+    </div>
+
+    <div class="team page-section">
+      <?php print views_embed_view('team','hub_team', $user_id ); ?> 
+    </div>
+
+    <?php if(array_key_exists("field_space_photos",$user_profile)) : ?>
+      <div class="page-section">
+
+        <div class="imagery">
+          <div class="owl-carousel owl-theme">
+            <?php
+              
+              $photos = $user_profile['field_space_photos']['#object']->field_space_photos['und'];
+              foreach ($photos as $key => $item) : ?>
+                <div class="item">
+                  <img src="<?php print image_style_url('slide_image', $item['uri']) ?>">
+                </div> <?php
+              endforeach;
+              
+            ?>
+          </div>
+        </div>
+
+      </div>
+    <?php endif; ?>
+
+    <?php if(array_key_exists("field_hub_startups",$user_profile)) : ?>
+      <div class="page-section view-startup-profiles">
+        <div class="view-content">
+          <h3> Startups </h3>
+          <div class="row">
+          <?php 
+            $startups = $user_profile['field_hub_startups']['#object']->field_hub_startups['und'];
+
+            foreach ($startups as $key => $startup) : ?>
+              <?php $startup_link = "/user/" . $startup['entity']->uid; ?>
+              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="startup-teaser">
+                  <div class="views-field views-field-field-logo">
+                    <div class="field-content">
+                      <?php 
+                        $image_uri = "";
+                        if( count($startup['entity']->field_logo) > 0 ) :
+                          $image_uri = $startup['entity']->field_logo['und'][0]['uri']; ?>
+                          <img src="<?php print image_style_url('wide_thumbnail', $image_uri) ?>">
+                        <?php
+                        endif;
+                      ?>
+                      
+                    </div>
+                  </div>  
+                  <div class="views-field views-field-field-company-name">
+                    <div class="field-content"> <?php print $startup['entity']->field_company_name['und'][0]['safe_value']; ?></div>
+                  </div>      
+                  <div class="views-field views-field-view-user">
+                    <span class="field-content"><a href="<?php print $startup_link; ?>">
+                      <?php print $startup['entity']->field_pitch['und'][0]['safe_value']; ?>
+                    </a></span>
+                  </div>      
+                  <div class="views-field views-field-field-year-founded">
+                    <div class="field-content"><?php print $startup['entity']->field_year_founded['und'][0]['value']; ?></div>
+                  </div>
+                </div>
+              </div> <?php
+            endforeach;
+          ?>
+          </div>
+        </div>   
+      </div>
+    <?php endif; ?>
+
+    <?php if(array_key_exists("field_hub_donors",$user_profile)) : ?>
+      <div class="page-section">
+        <div class="imagery donors">
+          <div class="donors-carousel owl-theme">
+            <?php
+              
+              $donors = $user_profile['field_hub_donors']['#object']->field_hub_donors['und'];
+              foreach ($donors as $key => $item) : 
+                $donor_name = $item['entity']->field_fund_name['und'][0]['value']; 
+                $donor_photo = $item['entity']->field_donor_photo['und'][0] ?>
+                 <div class="item">
+                  <div class="donor">
+                    <img src="<?php print image_style_url('wide_thumbnail', $donor_photo['uri']) ?>">
+                    <p> <?php print $donor_name; ?> </p>
+                  </div>
+                 </div> <?php
+              endforeach;
+              
+            ?>
+          </div>
+        </div>
+
+      </div>
+    <?php endif; ?>
+
 
   <?php elseif($profile_type == "investor") : ?>
     <div class="row">
@@ -371,5 +313,6 @@
     jQuery(".owl-carousel").trigger('refresh.owl.carousel');
     jQuery(".owl-carousel").trigger('refresh.owl.carousel');
     jQuery(".owl-carousel").trigger('refresh.owl.carousel');
+    jQuery(".donors-carousel").trigger('refresh.owl.carousel');
   });
 </script>

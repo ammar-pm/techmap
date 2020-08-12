@@ -31,3 +31,17 @@
   </div>
 
 </div>
+
+<script>
+  window.VIDEOASK_EMBED_CONFIG = {
+    "kind": "widget",
+    "url": "https://www.videoask.com/f8en3v6ly",
+    "options": {
+      "widgetType": "VideoThumbnailExtraLarge",
+      "text": "Talk to me",
+      "backgroundColor": "#0056FE",
+      "position": "bottom-right"
+    }
+  }
+</script>
+<script src="https://www.videoask.com/embed/embed.js"></script>
