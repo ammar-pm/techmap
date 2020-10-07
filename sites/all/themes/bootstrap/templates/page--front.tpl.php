@@ -80,24 +80,24 @@
   <div class="landing">
     <div>
       <h1> 970 Tech Map </h1>
-      <h2> Explore the Palestinian Innovation </h2>
+      <h2> Explore Palestinian Innovation </h2>
     </div>
 
     <div class="counters">
       <div class="row">
         <div class="col-sm-4"> 
           <a href="<?php print $base_path; ?>hubs">
-            <?php print views_embed_view('counters','enablers_counter'); ?>
+            <?php print views_embed_view('user_counters','hubs_counter'); ?>
           </a>
         </div>
         <div class="col-sm-4">
           <a href="<?php print $base_path; ?>startups">
-            <?php print views_embed_view('counters','startups_counter'); ?> 
+            <?php print views_embed_view('user_counters','startups_counter'); ?> 
           </a>
         </div>
         <div class="col-sm-4">
           <a href="<?php print $base_path; ?>investors">
-            <?php print views_embed_view('counters','investors_counter'); ?>
+            <?php print views_embed_view('user_counters','investors_counter'); ?>
           </a>
         </div>
       </div>

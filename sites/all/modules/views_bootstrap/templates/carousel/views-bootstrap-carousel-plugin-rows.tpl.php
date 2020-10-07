@@ -1,4 +1,6 @@
-<?php print $image ?>
+<?php if(isset($image)): ?>
+	<?php print $image ?>
+<?php endif; ?>
 
 <?php if (!empty($title) || !empty($description)): ?>
   <div class="carousel-caption">

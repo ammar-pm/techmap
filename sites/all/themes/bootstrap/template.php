@@ -50,6 +50,48 @@ function bootstrap_theme(&$existing, $type, $theme, $path) {
   return _bootstrap_theme($existing, $type, $theme, $path);
 }
 
+// function bootstrap_theme() {
+//   $items = array();
+	
+//   $items['user_login'] = array(
+//     'render element' => 'form',
+//     'path' => drupal_get_path('theme', 'bootstrap') . '/templates',
+//     'template' => 'user-login',
+//     'preprocess functions' => array(
+//        'bootstrap_preprocess_user_login'
+//     ),
+//   );
+//   $items['user_register_form'] = array(
+//     'render element' => 'form',
+//     'path' => drupal_get_path('theme', 'bootstrap') . '/templates',
+//     'template' => 'user-register-form',
+//     'preprocess functions' => array(
+//       'bootstrap_preprocess_user_register_form'
+//     ),
+//   );
+//   $items['user_pass'] = array(
+//     'render element' => 'form',
+//     'path' => drupal_get_path('theme', 'bootstrap') . '/templates',
+//     'template' => 'user-pass',
+//     'preprocess functions' => array(
+//       'bootstrap_preprocess_user_pass'
+//     ),
+//   );
+//   return $items;
+// }
+
+function bootstrap_preprocess_user_login(&$vars) {
+  $vars['intro_text'] = t('This is my awesome login form');
+}
+
+function bootstrap_preprocess_user_register_form(&$vars) {
+  $vars['intro_text'] = t('This is my super awesome reg form');
+}
+
+function bootstrap_preprocess_user_pass(&$vars) {
+  $vars['intro_text'] = t('This is my super awesome request new password form');
+}
+
 /**
  * Clear any previously set element_info() static cache.
  *

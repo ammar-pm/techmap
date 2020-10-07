@@ -88,37 +88,42 @@
       </div>
     </div>
 
-    <div class="page-section">
+    <?php if(!empty($user_profile['field_screenshots'])): ?>
 
-      <div class="imagery">
-        <div class="owl-carousel owl-theme">
-          <?php
-            $screenshots = $user_profile['field_screenshots']['#object']->field_screenshots['und'];
-            foreach ($screenshots as $key => $item) : ?>
-              <div class="item">
-                <img src="<?php print image_style_url('slide_image', $item['uri']) ?>">
-              </div> <?
-            endforeach;
-          ?>
-        </div>
-      </div>
+      <div class="page-section">
 
-      <!-- https://www.youtube.com/embed/xVAWRVsronM
-      https://www.youtube.com/watch?v=xVAWRVsronM -->
-
-      <?php 
-        $video_url = $user_profile['field_video']['#object']->field_video['und'][0]["safe_value"]; 
-        $video = str_replace("watch?v=","embed/",$video_url);
-      ?>
-      <?php if($video != ""): ?>
-        <div class="page-section">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="<?php print $video ?>"></iframe>
+        <div class="imagery">
+          <div class="owl-carousel owl-theme">
+            <?php
+              $screenshots = $user_profile['field_screenshots']['#object']->field_screenshots['und'];
+              foreach ($screenshots as $key => $item) : ?>
+                <div class="item">
+                  <img src="<?php print image_style_url('slide_image', $item['uri']) ?>">
+                </div> <?
+              endforeach;
+            ?>
           </div>
         </div>
-      <?php endif; ?>
 
-    </div>
+        <!-- https://www.youtube.com/embed/xVAWRVsronM
+        https://www.youtube.com/watch?v=xVAWRVsronM -->
+        <?php if(!empty($user_profile['field_video'])): ?>
+          <?php 
+            $video_url = $user_profile['field_video']['#object']->field_video['und'][0]["safe_value"]; 
+            $video = str_replace("watch?v=","embed/",$video_url);
+          ?>
+          <?php if($video != ""): ?>
+            <div class="page-section">
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="<?php print $video ?>"></iframe>
+              </div>
+            </div>
+          <?php endif; ?>
+        <?php endif; ?>
+
+      </div>
+
+    <?php endif; ?>
 
 
   <?php elseif($profile_type == "enabler") : ?>

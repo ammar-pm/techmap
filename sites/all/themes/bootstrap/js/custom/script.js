@@ -8,7 +8,7 @@
 
     var pathname = window.location.pathname;
     if(pathname.includes("hubs")) {
-      $(".view-display-id-enablers_counter").addClass("active");
+      $(".view-display-id-hubs_counter").addClass("active");
     }
     if(pathname.includes("startups")) {
       $(".view-display-id-startups_counter").addClass("active");
@@ -182,7 +182,7 @@
 
     // landing counters
     if($(".landing").length > 0) {
-      var enablers_counter = $(".view-display-id-enablers_counter .view-header")[0];
+      var enablers_counter = $(".view-display-id-hubs_counter .view-header")[0];
       var statrups_counter = $(".view-display-id-startups_counter .view-header")[0];
       var investors_counter = $(".view-display-id-investors_counter .view-header")[0];
       var mapOpened = false;
@@ -468,7 +468,7 @@
 
       var mymap = L.map('map', {
         minZoom: 9,
-        scrollWheelZoom: false, 
+        scrollWheelZoom: true,
         zoomControl: true, 
         maxBounds: PALESTINE_BOUNDS
       }).setView([31.958043, 34.204269], 9);
@@ -646,6 +646,7 @@
 
           $("#views-exposed-form-hubs-map-block input.form-text").attr("placeholder","Search hubs...").attr("autocomplete","off");
           $("#edit-field-hub-type-value option:first-child").html("All Hub Types");
+          $("#marker-info-panel").css("left","-100%");
         }
       });
     }
@@ -668,7 +669,7 @@
         content += space;
       }
       if (social_links) {
-        content += social_links;
+        content += "<div class='social-links'>" + social_links + "</div>";
       }
       if (link) {
         content += "<br/>" + link;

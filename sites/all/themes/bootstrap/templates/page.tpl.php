@@ -156,10 +156,9 @@
 <div class="side-nav">
   <div>
     <a href="<?php print $front_page; ?>" title="Home">
-      <p class="logo">+970
-        <i>Palestine</i></p>
+      <p class="logo">+970</p>
     </a>
-    <p class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search.. </p>
+    <p class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search </p>
   </div>
 
   <div class="main-nav">
@@ -167,17 +166,17 @@
       <div class="row">
         <div class="col-sm-4"> 
           <a href="<?php print $base_path; ?>hubs">
-            <?php print views_embed_view('counters','enablers_counter'); ?>
+            <?php print views_embed_view('user_counters','hubs_counter'); ?>
           </a>
         </div>
         <div class="col-sm-4">
           <a href="<?php print $base_path; ?>startups">
-            <?php print views_embed_view('counters','startups_counter'); ?> 
+            <?php print views_embed_view('user_counters','startups_counter'); ?> 
           </a>
         </div>
         <div class="col-sm-4">
           <a href="<?php print $base_path; ?>investors">
-            <?php print views_embed_view('counters','investors_counter'); ?>
+            <?php print views_embed_view('user_counters','investors_counter'); ?>
           </a>
         </div>
       </div>
